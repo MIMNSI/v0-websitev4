@@ -1,0 +1,343 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Updated color system with brand colors */
+:root {
+  /* Brand Colors */
+  --primary: #2dffa7;
+  --background: #0a0a0a;
+  --dark: #1a1a1a;
+  --white: #ffffff;
+  --light: #e5e5e5;
+  --muted: #b3b3b3;
+  --medium: #4a4a4a;
+
+  /* Shadcn Design Tokens */
+  --foreground: var(--white);
+  --card: var(--dark);
+  --card-foreground: var(--light);
+  --popover: var(--dark);
+  --popover-foreground: var(--light);
+  --primary-foreground: var(--background);
+  --secondary: var(--dark);
+  --secondary-foreground: var(--light);
+  --muted-foreground: var(--muted);
+  --accent: var(--primary);
+  --accent-foreground: var(--background);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: var(--medium);
+  --input: var(--medium);
+  --ring: var(--primary);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: var(--dark);
+  --sidebar-foreground: var(--light);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--background);
+  --sidebar-accent: var(--medium);
+  --sidebar-accent-foreground: var(--light);
+  --sidebar-border: var(--medium);
+  --sidebar-ring: var(--primary);
+}
+
+.dark {
+  /* Dark mode uses same colors since design is dark by default */
+  --background: #0a0a0a;
+  --foreground: var(--white);
+  --card: var(--dark);
+  --card-foreground: var(--light);
+  --popover: var(--dark);
+  --popover-foreground: var(--light);
+  --primary: #2dffa7;
+  --primary-foreground: var(--background);
+  --secondary: var(--dark);
+  --secondary-foreground: var(--light);
+  --muted: var(--medium);
+  --muted-foreground: var(--muted);
+  --accent: var(--primary);
+  --accent-foreground: var(--background);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: var(--medium);
+  --input: var(--medium);
+  --ring: var(--primary);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: var(--dark);
+  --sidebar-foreground: var(--light);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--background);
+  --sidebar-accent: var(--medium);
+  --sidebar-accent-foreground: var(--light);
+  --sidebar-border: var(--medium);
+  --sidebar-ring: var(--primary);
+}
+
+/* Added brand color utilities to Tailwind theme */
+@theme inline {
+  /* Updated font-display to use Sora instead of Funnel Display */
+  --font-display: "Sora", "Sora Fallback";
+  /* Changed from Albert Sans to Geist */
+  --font-body: "Geist", "Geist Fallback";
+  --font-sans: var(--font-body);
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  /* Added handwritten font variable */
+  --font-handwritten: "Caveat", cursive;
+
+  /* Brand Colors */
+  --color-primary: #2dffa7;
+  --color-background: #0a0a0a;
+  --color-dark: #1a1a1a;
+  --color-white: #ffffff;
+  --color-light: #e5e5e5;
+  --color-muted: #b3b3b3;
+  --color-medium: #4a4a4a;
+
+  /* Shadcn Tokens */
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Added animation definitions for Tailwind v4 */
+  --animate-slide-in-from-top-2: slide-in-from-top-2 0.2s ease-out;
+  --animate-slide-in-from-bottom-2: slide-in-from-bottom-2 0.2s ease-out;
+  --animate-slide-in-from-left-2: slide-in-from-left-2 0.2s ease-out;
+  --animate-slide-in-from-right-2: slide-in-from-right-2 0.2s ease-out;
+  --animate-slide-in-from-left-52: slide-in-from-left-52 0.2s ease-out;
+  --animate-slide-in-from-right-52: slide-in-from-right-52 0.2s ease-out;
+  --animate-slide-out-to-left-52: slide-out-to-left-52 0.2s ease-out;
+  --animate-slide-out-to-right-52: slide-out-to-right-52 0.2s ease-out;
+  --animate-slide-out-to-right: slide-out-to-right 0.2s ease-out;
+  --animate-slide-in-from-right: slide-in-from-right 0.2s ease-out;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-light;
+  }
+
+  /* Added typography scale utilities */
+  .ts-h1 {
+    font-family: var(--font-display);
+    font-size: 96px;
+    line-height: 105.6px;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .ts-h2 {
+    font-family: var(--font-display);
+    font-size: 60px;
+    line-height: 66px;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .ts-h3 {
+    font-family: var(--font-display);
+    font-size: 48px;
+    line-height: 52.8px;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .ts-h4 {
+    font-family: var(--font-display);
+    font-size: 34px;
+    line-height: 40.8px;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  /* Added h5 and h6 styles with font-weight: 400 */
+  .ts-h5 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .ts-h6 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .ts-body1 {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 25.5px;
+    font-weight: 400;
+    color: var(--color-light);
+  }
+
+  .ts-body2 {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 22.5px;
+    font-weight: 400;
+    color: var(--color-light);
+  }
+
+  .ts-button {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .ts-caption {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 18.2px;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+
+  .ts-overline {
+    font-family: var(--font-body);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-muted);
+  }
+}
+
+/* Added keyframe definitions for slide animations */
+@keyframes slide-in-from-top-2 {
+  from {
+    transform: translateY(-0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-bottom-2 {
+  from {
+    transform: translateY(0.5rem);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-left-2 {
+  from {
+    transform: translateX(-0.5rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-right-2 {
+  from {
+    transform: translateX(0.5rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-left-52 {
+  from {
+    transform: translateX(-13rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-right-52 {
+  from {
+    transform: translateX(13rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-to-left-52 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-13rem);
+  }
+}
+
+@keyframes slide-out-to-right-52 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(13rem);
+  }
+}
+
+@keyframes slide-out-to-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
