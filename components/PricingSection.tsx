@@ -1,6 +1,6 @@
 "use client"
 
-import { Check } from "lucide-react"
+import { Check, X } from "lucide-react" // Added X import
 import { Button } from "./ui/button"
 
 export default function PricingSection() {
@@ -61,6 +61,7 @@ export default function PricingSection() {
 
               {/* Features List */}
               <div className="space-y-3 flex-1">
+                {/* Included Features */}
                 {[
                   "Video uploads only",
                   "Supports small to medium objects (e.g., toys, decor, furniture)",
@@ -75,6 +76,17 @@ export default function PricingSection() {
                   <div key={index} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
                     <span className="text-sm md:text-base text-gray-300">{feature}</span>
+                  </div>
+                ))}
+
+                {/* Excluded Features (Cross Marked) */}
+                {[
+                  "Medium to large objects: Bike, Furniture etc",
+                  "Spaces and scenes captures"
+                ].map((feature, index) => (
+                  <div key={`excluded-${index}`} className="flex items-start gap-3 opacity-60">
+                    <X className="w-5 h-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+                    <span className="text-sm md:text-base text-muted-foreground">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -112,7 +124,7 @@ export default function PricingSection() {
                  {/* Right Column: Video */}
                  <div className="w-full md:w-64 shrink-0 aspect-video rounded-lg overflow-hidden bg-black/50 border border-primary/20 mt-1">
                     <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-                      <source src="https://websitecreatives.s3.ap-south-1.amazonaws.com/Enterprise_3D.mp4" type="video/mp4" />
+                      <source src="https://websitecreativesmetashop.s3.eu-north-1.amazonaws.com/Enterprise_3D.mp4" type="video/mp4" />
                     </video>
                  </div>
 
@@ -150,7 +162,6 @@ export default function PricingSection() {
 
         {/* Footer Note */}
         <div className="mt-12 text-center">
-          {/* Change: Removed 'max-w-3xl' and added 'w-full' to allow text to expand to one line */}
           <p className="text-sm text-muted-foreground w-full mx-auto">
             All plans include enterprise-grade security and customer data protection. Use of the platform is subject to
             the terms outlined in our Terms of Use.
