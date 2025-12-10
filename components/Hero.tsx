@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import TextScroller from "@/components/TextScroller"
 
 export default function Hero() {
   return (
@@ -13,14 +14,12 @@ export default function Hero() {
       <div className="relative z-10 container mx-auto px-4 md:px-6 flex-1 flex flex-col justify-center">
         <div className="max-w-[1400px] mx-auto w-full">
           
-          {/* Layout Change: Switched from grid-cols-2 to a centered flex column */}
           <div className="flex flex-col items-center justify-center">
             
-            {/* Content Wrapper: Added max-width and removed ordering classes */}
             <div className="w-full max-w-4xl mx-auto text-center">
               
-              {/* Badge: Removed lg:mx-0 to keep it centered on all screens */}
-              <div className="inline-flex items-center gap-0 rounded-full border border-white/20 bg-[#1a1a1a]/60 backdrop-blur-sm py-1 md:py-1.5 mb-6 md:mb-8 lg:py-1.5 px-px pr-0.5 mx-auto">
+              {/* Badge - Increased bottom margin (mb-8 md:mb-10) to prevent visual crowding */}
+              <div className="inline-flex items-center gap-0 rounded-full border border-white/20 bg-[#1a1a1a]/60 backdrop-blur-sm py-1 md:py-1.5 mb-8 md:mb-10 lg:py-1.5 px-px pr-0.5 mx-auto">
                 <div className="rounded-full bg-white px-2.5 py-1 ml-0.5 md:ml-[6px] md:px-3 lg:px-1.5 lg:py-0.5">
                   <span className="text-xs md:text-sm lg:text-[14px] font-medium text-black whitespace-nowrap">
                     100% AI-driven
@@ -31,16 +30,37 @@ export default function Hero() {
                 </span>
               </div>
 
-              {/* Heading: Removed lg:text-left to keep it centered */}
+              {/* Heading */}
               <h1 className="text-4xl md:text-5xl lg:text-[78px] font-light mb-8 md:mb-12 leading-tight font-sans text-center">
-                <span className="md:inline block text-white/80">Everything </span>
-                <span className="md:inline block">
+                
+                {/* SOLUTION: Added a specific container <div> for the scroller.
+                   - h-[1.2em]: Restricts height to exactly one line of text.
+                   - overflow-hidden: Cuts off any text sliding in/out.
+                   - flex/justify-center: Keeps the text centered.
+                */}
+                <div className="relative h-[1.2em] w-full overflow-hidden flex justify-center items-center mb-2 md:mb-4">
+                  <span className="text-white/80">
+                    <TextScroller 
+                      words={[
+                        "Everything",
+                        "Buildings",
+                        "Landscapes",
+                        "Interiors",
+                        "Inventory",
+                        "Automobile"
+                      ]}
+                    />
+                  </span>
+                </div>
+                
+                {/* Second Line: Static Text */}
+                <span className="block">
                   <span className="text-white">to 3D with </span>
                   <span className="bg-gradient-to-r from-[#2dffa7] to-[#1a8f65] bg-clip-text text-transparent">AI</span>
                 </span>
               </h1>
 
-              {/* Cards Grid: Added mx-auto to center the grid block */}
+              {/* Cards Grid */}
               <div className="grid grid-cols-2 gap-3 md:gap-6 mb-8 md:mb-12 lg:max-w-[86.25%] mx-auto">
                 {/* Video to 3D Card */}
                 <div className="rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#1a4d3a]/60 to-[#0d2619]/40 backdrop-blur-sm border border-[#2dffa7]/30 p-4 md:p-8 flex flex-col items-center justify-between min-h-[140px] md:min-h-[200px]">
@@ -64,7 +84,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Trusted By: Removed lg:justify-start to keep it centered */}
+              {/* Trusted By */}
               <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6">
                 <span className="text-sm md:text-base text-white font-light">Trusted by:</span>
                 <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
@@ -100,7 +120,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Right Column (3D Viewer) has been removed */}
           </div>
         </div>
       </div>

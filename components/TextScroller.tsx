@@ -2,13 +2,19 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { cn } from "@/lib/utils"
 
 interface TextScrollerProps {
   words: string[]
   interval?: number
+  className?: string
 }
 
-export default function TextScroller({ words, interval = 2500 }: TextScrollerProps) {
+export default function TextScroller({ 
+  words, 
+  interval = 2000, // Faster interval for tumbler feel
+  className 
+}: TextScrollerProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
@@ -20,19 +26,28 @@ export default function TextScroller({ words, interval = 2500 }: TextScrollerPro
   }, [words.length, interval])
 
   return (
-    <span className="inline-block relative">
-      <AnimatePresence mode="wait">
+    <div className={cn("inline-grid overflow-hidden h-[1.1em] align-top", className)}>
+      <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={currentIndex}
-          initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="inline-block bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+          initial={{ y: "100%" }}
+          animate={{ y: "0%" }}
+          exit={{ y: "-100%" }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            duration: 0.5 
+          }}
+          className="col-start-1 row-start-1 flex items-center justify-center whitespace-nowrap"
         >
           {words[currentIndex]}
         </motion.span>
       </AnimatePresence>
-    </span>
+      {/* Invisible spacer to set container width based on longest word */}
+      <span className="col-start-1 row-start-1 invisible opacity-0">
+        {words.reduce((a, b) => a.length > b.length ? a : b)}
+      </span>
+    </div>
   )
 }
