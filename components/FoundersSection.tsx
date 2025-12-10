@@ -7,7 +7,7 @@ export default function FoundersSection() {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <section className="relative py-[40px] md:py-[80px] lg:py-[90px]">
+    <section className="relative py-[40px] md:py-[80px] lg:py-[90px] bg-background">
       <div className="w-[95%] max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -24,10 +24,10 @@ export default function FoundersSection() {
               duration: 0.8,
               ease: [0.2, 0.9, 0.2, 1],
             }}
-            className="group relative overflow-hidden rounded-[32px] bg-black border-2 border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.08)] transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.12),0_2px_12px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 will-change-transform"
+            className="group relative overflow-hidden rounded-[32px] bg-black border-2 border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.15),0_2px_12px_rgba(0,0,0,0.1)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.2),0_4px_16px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 will-change-transform"
           >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[length:4px_4px]" />
+            <div className="absolute inset-0 opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:4px_4px]" />
             </div>
 
             <div className="relative p-4 md:p-[58px] lg:p-16">
@@ -125,7 +125,7 @@ export default function FoundersSection() {
               </button>
             </div>
 
-            <div className="absolute inset-0 -z-10 rounded-[32px] p-px bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 -z-10 rounded-[32px] p-px bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-100 transition-opacity duration-300" />
           </motion.div>
         </motion.div>
       </div>

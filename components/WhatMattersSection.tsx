@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { GlowingEffect } from "@/components/ui/glowing-effect"
 
 const features = [
@@ -9,35 +10,35 @@ const features = [
     id: "ar-vr",
     title: "3D, AR & VR – Visualization Ready",
     description: "Your 3D assets adapt instantly to AR and VR environments — optimized for every platform and device.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/asset/ar-vr.jpg",
   },
   {
     id: "dimensional",
     title: "Dimensionally Accurate",
     description:
       "Scaled to real-world measurements with precision you can trust — perfect for eCommerce, architecture, and design workflows.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/asset/dimensional.jpg",
   },
   {
     id: "any-surface",
     title: "Any Surface to 3D",
     description:
       "Transparent, reflective, or textured — we turn every surface into high-fidelity 3D, ready for clean visualization.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/asset/any-surface.jpg",
   },
   {
     id: "customise",
     title: "Customise Your Interactive 3D Viewer",
     description:
       "Add your brand logos, CTAs, labels, and hotspot interactions — tailor every 3D experience to your audience.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/asset/customise.jpg",
   },
   {
     id: "analytics",
     title: "Built-in Viewer Analytics",
     description:
       "Track interactions, time spent, and engagement directly in your 3D viewer — actionable insights for marketing and performance tracking.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/asset/analytics.jpg",
   },
 ]
 
@@ -48,7 +49,7 @@ const embedTabs = [
     title: "Embed in just 5 mins. Share in 1-click.",
     description:
       "Copy and paste your 3D model link anywhere — websites, social media, or eCommerce platforms. No setup, no code.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/asset/embed.png",
   },
   {
     id: "download",
@@ -63,7 +64,7 @@ const embedTabs = [
     name: "Plugins",
     title: "One-Click Export to Blender & Unity.",
     description: "Directly export your 3D assets using our plugin — quick setup, smooth workflow.",
-    image: "/placeholder.svg?height=400&width=600",
+    image: "/asset/plugins.png",
   },
 ]
 
@@ -148,10 +149,12 @@ export default function WhatMattersSection() {
                   className="space-y-4"
                 >
                   <div className="w-full aspect-[16/5.4] rounded-xl overflow-hidden bg-muted/30">
-                    <img
+                    <Image
                       src={activeTabContent?.image || "/placeholder.svg"}
-                      alt={activeTabContent?.title}
+                      alt={activeTabContent?.title || "Tab image"}
                       className="w-full h-full object-cover"
+                      width={800}
+                      height={270}
                     />
                   </div>
 
@@ -177,9 +180,18 @@ function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
     <div className="relative rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-card h-full">
       <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
 
+      {/* UPDATED: Removed 'lg:grayscale', 'lg:hover:grayscale-0' and transition classes.
+         The card is now standard full color at all times.
+      */}
       <div className="relative rounded-xl border border-border/50 bg-background p-6 md:p-8 shadow-sm h-full min-h-[400px] flex flex-col">
         <div className="w-full aspect-video rounded-xl overflow-hidden bg-muted/30 flex-shrink-0">
-          <img src={feature.image || "/placeholder.svg"} alt={feature.title} className="w-full h-full object-cover" />
+          <Image
+            src={feature.image || "/placeholder.svg"}
+            alt={feature.title}
+            className="w-full h-full object-cover"
+            width={600}
+            height={338}
+          />
         </div>
 
         {/* Title */}

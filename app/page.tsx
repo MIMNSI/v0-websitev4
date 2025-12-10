@@ -1,3 +1,4 @@
+import NewHeader from "@/components/NewHeader"
 import Hero from "@/components/Hero"
 import ProductionSection from "@/components/ProductionSection"
 import TestimonialSection from "@/components/TestimonialSection"
@@ -15,14 +16,15 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="min-h-screen bg-black">
+      <NewHeader />
       <Hero />
       <ProductionSection />
       <TestimonialSection />
       <FeaturesSection />
-      <FoundersSection />
       <WhatMattersSection />
       <PerformanceSection />
       <PricingSection />
+      <FoundersSection />
     </main>
   )
 }

@@ -21,9 +21,9 @@ export default function TestimonialSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 sm:grid-cols-[260px_1fr] lg:grid-cols-[455px_1fr] gap-6 md:gap-8 items-center"
+          className="grid grid-cols-1 sm:grid-cols-[260px_1fr] lg:grid-cols-[455px_1fr] gap-6 md:gap-8 items-center w-full"
         >
-          <div className="relative w-[244px] sm:w-[260px] lg:w-[455px] h-[150px] sm:h-[160px] lg:h-[280px] rounded-2xl bg-gradient-to-br from-zinc-800/80 via-zinc-900/90 to-black/95 border border-white/10 flex items-center justify-center p-8 overflow-hidden mx-auto sm:mx-0">
+          <div className="relative w-full sm:w-[260px] lg:w-[455px] h-[150px] sm:h-[160px] lg:h-[280px] rounded-2xl bg-gradient-to-br from-zinc-800/80 via-zinc-900/90 to-black/95 border border-white/10 flex items-center justify-center p-8 overflow-hidden">
             {/* Subtle gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
 

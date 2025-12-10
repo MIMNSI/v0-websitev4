@@ -1,56 +1,11 @@
 "use client"
 
-import { PricingCards, type PricingTier } from "@/components/ui/pricing-cards"
-import { Button } from "@/components/ui/button"
-
-const tiers: PricingTier[] = [
-  {
-    name: "Free",
-    price: 0,
-    description: "3D Artists & Hobbyists",
-    features: [
-      { name: "Input file: Videos (mov, mp4 only)", included: true },
-      { name: "Supports small to medium objects (e.g., toys, decor, furniture)", included: true },
-      { name: "Supports textured, shiny, transparent & complex objects", included: true },
-      { name: "NeRF-based 3D technology", included: true },
-      { name: "Export to glb, obj, usdz, ply", included: true },
-      { name: "1-1.5 hour 3D asset turnaround", included: true },
-      { name: "Multi-device, zero-lag 3D viewer", included: true },
-      { name: "Input file size limit up to 2GB", included: true },
-      { name: "Email support", included: true },
-    ],
-    highlight: false,
-    cta: {
-      text: "Start your 3D project",
-    },
-  },
-  {
-    name: "Enterprise & API",
-    price: 0,
-    description: "Real Estate, E-commerce, Automobile",
-    features: [
-      { name: "Everything in Free, plus:", included: true, highlight: true },
-      { name: "Input file: Videos (mov, mp4 only), Image to 3D coming soon", included: true },
-      { name: "Supports large spaces (e.g., rooms, flats, showrooms, buildings, landscapes)", included: true },
-      { name: "Gaussian Splats–based 3D technology", included: true },
-      { name: "Export to ply", included: true },
-      { name: "Same-day 3D asset turnaround", included: true },
-      { name: "Unlimited input file size", included: true },
-      { name: "Branded & customizable 3D viewer", included: true },
-      { name: "Advanced viewer analytics", included: true },
-      { name: "Priority feature requests", included: true },
-      { name: "Email support & tech support", included: true },
-      { name: "Dedicated web integration assistance", included: true },
-      { name: "Custom feature requests", included: true },
-    ],
-    highlight: true,
-    cta: null as any,
-  },
-]
+import { Check } from "lucide-react"
+import { Button } from "./ui/button"
 
 export default function PricingSection() {
   return (
-    <section className="py-[40px] md:py-[80px] lg:py-[90px]">
+    <section className="py-[40px] md:py-[80px] lg:py-[90px] bg-background">
       <div className="w-[95%] max-w-7xl mx-auto">
         {/* Title and Body */}
         <div className="text-center mb-12 md:mb-16">
@@ -63,46 +18,140 @@ export default function PricingSection() {
           </p>
         </div>
 
-        <PricingCards
-          tiers={tiers}
-          sectionClassName="py-0 px-0"
-          containerClassName="px-0"
-          className="grid-cols-1 lg:grid-cols-[minmax(390px,490px)_minmax(390px,490px)] justify-center gap-6 lg:gap-8"
-          cardClassName={(tier) => {
-            if (tier.name === "Enterprise & API") {
-              return "bg-gradient-to-b from-emerald-900/60 via-emerald-950/30 to-black border-0 lg:min-h-[700px]"
-            }
-            return "bg-neutral-900 border-border lg:min-h-[700px]"
-          }}
-          renderCustomCTA={(tier) => {
-            if (tier.name === "Enterprise & API") {
-              return (
-                <div className="mt-8">
-                  <Button className="w-full h-12 bg-primary hover:bg-primary/90 text-black font-medium">
-                    Book a Demo
-                  </Button>
-                </div>
-              )
-            }
-            if (tier.name === "Free") {
-              return (
-                <div className="mt-8">
-                  <Button
-                    variant="outline"
-                    className="w-full h-12 border-neutral-600 text-white hover:bg-neutral-800 hover:text-white font-medium bg-transparent"
-                  >
-                    Start your 3D project
-                  </Button>
-                </div>
-              )
-            }
-            return null
-          }}
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] gap-6 md:gap-8 mb-12">
+          
+          {/* --- FREE CARD --- */}
+          <div className="group relative rounded-xl overflow-hidden transition-all duration-300 border border-white/10 bg-black h-full flex flex-col">
+            {/* Card Content */}
+            <div className="relative p-6 md:p-8 flex flex-col flex-1 h-full">
+              
+              <div className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-4 mb-8">
+                 
+                 {/* Left Column */}
+                 <div className="flex flex-col justify-center items-start flex-1 min-w-0 w-full">
+                    <h3 className="text-2xl md:text-3xl font-semibold mb-1">Free</h3>
+                    <p className="text-muted-foreground text-sm md:text-base leading-tight mb-5">
+                      3D Artists & Hobbyists
+                    </p>
+                    
+                    {/* CTA */}
+                    <a
+                      href="https://app.metashopai.com/"
+                      className="block w-full md:w-auto"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full md:w-[200px] bg-transparent border-white/20 hover:bg-white/10 text-white hover:text-white font-medium px-6"
+                      >
+                        Start your 3D project
+                      </Button>
+                    </a>
+                 </div>
+
+                 {/* Right Column: Video */}
+                 <div className="w-full md:w-64 shrink-0 aspect-video rounded-lg overflow-hidden bg-black/50 border border-white/10 mt-1">
+                    <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                      <source src="https://websitecreatives.s3.ap-south-1.amazonaws.com/Free_3D.mp4" type="video/mp4" />
+                    </video>
+                 </div>
+
+              </div>
+
+              <div className="w-full h-px bg-white/10 mb-8" />
+
+              {/* Features List */}
+              <div className="space-y-3 flex-1">
+                {[
+                  "Video uploads only",
+                  "Supports small to medium objects (e.g., toys, decor, furniture)",
+                  "Supports textured, shiny, transparent & complex objects",
+                  "NeRF 3D technology",
+                  "Export to glb, obj, usdz, ply",
+                  "1–1.5 hour 3D asset turnaround",
+                  "Multi-device, zero-lag 3D viewer",
+                  "2GB upload limit",
+                  "Email support only",
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
+                    <span className="text-sm md:text-base text-gray-300">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </div>
+
+
+          {/* --- ENTERPRISE CARD --- */}
+          <div className="group relative rounded-xl overflow-hidden transition-all duration-300 border border-white/10 bg-black shadow-[0_2px_12px_rgba(34,197,94,0.08)] -translate-y-0.5 h-full flex flex-col">
+            
+            {/* Background Effects */}
+            <div className="absolute inset-0 opacity-100 transition-opacity duration-300 pointer-events-none">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.04)_1px,transparent_1px)] bg-[length:4px_4px]" />
+            </div>
+            <div className="absolute inset-0 -z-10 rounded-xl p-px bg-gradient-to-br from-transparent via-white/15 to-transparent opacity-100 transition-opacity duration-300 pointer-events-none" />
+            {/* Card Content */}
+            <div className="relative p-6 md:p-8 flex flex-col flex-1 h-full">
+              
+               <div className="flex flex-col md:flex-row items-start justify-between gap-6 md:gap-4 mb-8">
+                 
+                 {/* Left Column */}
+                 <div className="flex flex-col justify-center items-start flex-1 min-w-0 w-full">
+                    <h3 className="text-2xl md:text-3xl font-semibold mb-1">Enterprise & API</h3>
+                    <p className="text-muted-foreground text-sm md:text-base leading-tight mb-5">
+                      Real Estate, E-commerce, Automobile
+                    </p>
+
+                    {/* CTA */}
+                    <Button className="w-full md:w-[240px] bg-primary hover:bg-primary/90 text-black font-medium px-8">
+                        Book a Demo
+                    </Button>
+                 </div>
+
+                 {/* Right Column: Video */}
+                 <div className="w-full md:w-64 shrink-0 aspect-video rounded-lg overflow-hidden bg-black/50 border border-primary/20 mt-1">
+                    <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                      <source src="https://websitecreatives.s3.ap-south-1.amazonaws.com/Enterprise_3D.mp4" type="video/mp4" />
+                    </video>
+                 </div>
+
+              </div>
+
+              <div className="w-full h-px bg-white/10 mb-8" />
+
+              {/* Features List */}
+              <div className="space-y-3 flex-1">
+                <p className="text-sm md:text-base text-gray-300 font-medium mb-4">Everything in Free, plus:</p>
+                {[
+                  "Image to 3D coming soon",
+                  "Supports large objects (e.g., furniture, bikes, cars)",
+                  "Supports large spaces (e.g., rooms, flats, showrooms, buildings, landscapes)",
+                  "Gaussian Splats technology",
+                  "Export to ply and plugins for Blender, Unity.",
+                  "Same-day 3D asset turnaround",
+                  "Unlimited input file size",
+                  "Customized 3D viewer",
+                  "Custom feature development",
+                  "Viewer analytics",
+                  "Email + tech support",
+                  "Integration assistance",
+                ].map((feature, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-sm md:text-base text-gray-300">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          </div>
+        </div>
 
         {/* Footer Note */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-muted-foreground max-w-3xl mx-auto">
+          {/* Change: Removed 'max-w-3xl' and added 'w-full' to allow text to expand to one line */}
+          <p className="text-sm text-muted-foreground w-full mx-auto">
             All plans include enterprise-grade security and customer data protection. Use of the platform is subject to
             the terms outlined in our Terms of Use.
           </p>

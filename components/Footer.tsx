@@ -47,7 +47,13 @@ export function Footer() {
             <div className="flex flex-col items-center gap-6 md:hidden">
               {/* Logo */}
               <Link href="/" className="flex items-center gap-3">
-                <Image src="/metashop-logo.svg" alt="MetaShop Logo" width={42} height={32} className="object-contain" />
+                <Image
+                  src="/logos/metashop-logo.svg"
+                  alt="MetaShop Logo"
+                  width={42}
+                  height={32}
+                  className="object-contain"
+                />
                 <span className="text-2xl font-semibold text-white">MetaShop</span>
               </Link>
 
@@ -56,6 +62,14 @@ export function Footer() {
                 <Link href="/" className="text-sm text-light hover:text-white transition-colors duration-300">
                   Home
                 </Link>
+                <a
+                  href="https://blitzapp.metashopai.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-light hover:text-white transition-colors duration-300"
+                >
+                  Blitz
+                </a>
                 <Link
                   href="/image-to-3d"
                   className="text-sm text-light hover:text-white transition-colors duration-300"
@@ -164,7 +178,13 @@ export function Footer() {
             <div className="hidden md:flex items-center justify-between gap-8">
               {/* Logo */}
               <Link href="/" className="flex-shrink-0">
-                <Image src="/metashop-logo.svg" alt="MetaShop Logo" width={42} height={32} className="object-contain" />
+                <Image
+                  src="/logos/metashop-logo.svg"
+                  alt="MetaShop Logo"
+                  width={42}
+                  height={32}
+                  className="object-contain"
+                />
               </Link>
 
               {/* Navigation Links */}
@@ -172,6 +192,14 @@ export function Footer() {
                 <Link href="/" className="text-sm text-light hover:text-white transition-colors duration-300">
                   Home
                 </Link>
+                <a
+                  href="https://blitzapp.metashopai.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-light hover:text-white transition-colors duration-300"
+                >
+                  Blitz
+                </a>
                 <Link
                   href="/image-to-3d"
                   className="text-sm text-light hover:text-white transition-colors duration-300"

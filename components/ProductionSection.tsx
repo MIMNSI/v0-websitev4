@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
+// -- Data --
 const industries = [
-  { id: "residential", name: "Residential Real Estate" },
+  { id: "residential", name: "Residential" },
   { id: "travel", name: "Travel & Hospitality" },
-  { id: "commercial", name: "Commercial Real Estate" },
+  { id: "commercial", name: "Commercial" },
   { id: "ecommerce", name: "E-commerce" },
 ]
 
@@ -71,111 +72,130 @@ export default function ProductionSection() {
   }
 
   return (
-    <section className="relative min-h-screen bg-background py-[40px] md:py-[80px] lg:py-[90px] px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Title */}
-        <h2 className="md:text-5xl lg:text-6xl text-center mb-5 md:mb-10 lg:mb-10 text-balance text-3xl font-display font-medium">
+    <section className="relative w-full min-h-screen bg-background flex flex-col justify-center py-8 md:py-12 lg:py-16 overflow-hidden">
+      
+      {/* --- TOP FADE FROM HERO --- */}
+      <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none" />
+      
+      {/* Page Container */}
+      <div className="w-full max-w-[1400px] mx-auto relative z-30 flex flex-col items-center px-4 md:px-6">
+        
+        {/* --- TITLE --- */}
+        <h2 className="md:text-5xl lg:text-6xl text-center mb-6 md:mb-8 text-balance text-3xl font-display font-medium text-white">
           Production-ready 3D in 1 Day
         </h2>
 
-        {/* Client Logo Tabs - Tab 1 */}
-        <div className="mb-5 md:mb-10 lg:mb-10">
-          <div className="max-w-6xl mx-auto overflow-x-auto scrollbar-hide pb-2">
-            <div className="flex justify-start md:justify-center items-center px-4 md:px-0 md:gap-6">
-              {allClients.map((client) => (
-                <button
-                  key={client.id}
-                  onClick={() => handleClientChange(client.id)}
-                  className={`relative px-4 py-2 md:px-6 md:py-3 lg:px-8 lg:py-[10px] transition-all duration-300 border rounded-xl bg-sidebar-primary-foreground flex-shrink-0 ${
-                    activeClientId === client.id
-                      ? "bg-white border-white"
-                      : "bg-neutral-800 border-neutral-700 hover:bg-neutral-700"
-                  }
-                  `}
-                >
-                  <img
-                    src={client.logo || "/placeholder.svg"}
-                    alt={`${client.name} logo`}
-                    className={`h-6 md:h-8 lg:h-[36px] w-auto object-contain transition-all duration-300 ${
-                      activeClientId === client.id ? "brightness-0" : "brightness-100 invert opacity-70"
-                    }`}
-                  />
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Industry Tabs - Tab 2 */}
-        <div className="mb-[10px] max-w-6xl mx-auto px-4 md:px-0">
-          <div className="flex text-sm overflow-x-auto scrollbar-hide justify-center md:gap-7">
-            {industries.map((industry) => (
+        {/* 1. Industry Filters (Tabs) */}
+        <div className="flex overflow-x-auto scrollbar-hide snap-x mb-6 border-b border-border/40 pb-3 gap-6 md:gap-10 
+                        w-[calc(100%+32px)] -mx-4 px-4 justify-start 
+                        md:w-full md:mx-0 md:px-0 md:justify-center">
+          {industries.map((industry) => {
+            const isActive = activeIndustry === industry.id
+            return (
               <button
                 key={industry.id}
                 onClick={() => handleIndustryChange(industry.id)}
                 className={`
-                  relative pb-2 px-2 transition-colors duration-300 whitespace-nowrap
-                  ${
-                    activeIndustry === industry.id
-                      ? "text-primary font-medium"
-                      : "text-muted-foreground hover:text-foreground/80"
-                  }
+                  relative text-sm md:text-base transition-colors duration-300 pb-2 flex-shrink-0 snap-start
+                  ${isActive ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground/70"}
                 `}
               >
                 {industry.name}
-
-                {activeIndustry === industry.id && (
+                {isActive && (
                   <motion.div
-                    layoutId="industryUnderline"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    layoutId="activeTab"
+                    className="absolute -bottom-[13px] left-0 right-0 h-[2px] bg-primary"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
               </button>
-            ))}
-          </div>
+            )
+          })}
         </div>
 
-        {/* 3D Model Viewer */}
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            key={activeClient?.modelUrl}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="relative rounded-2xl overflow-hidden border border-border/50 bg-card/30 backdrop-blur-sm h-[300px] md:h-[400px] lg:h-[450px]"
-          >
-            <iframe
-              src={activeClient?.modelUrl}
-              className="w-full h-full"
-              title={`3D model for ${activeClient?.name}`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
+        {/* 2. Client Logos (Selection Row) */}
+        <div className="flex overflow-x-auto scrollbar-hide snap-x mb-8 py-4 gap-3 md:gap-4 max-w-5xl
+                        w-[calc(100%+32px)] -mx-4 px-4 justify-start 
+                        md:w-full md:mx-0 md:px-0 md:justify-center">
+          {allClients.map((client) => {
+            const isActive = activeClientId === client.id
+            const isRelevant = client.industryId === activeIndustry
+            
+            return (
+              <button
+                key={client.id}
+                onClick={() => handleClientChange(client.id)}
+                className={`
+                  relative group h-12 md:h-14 px-4 md:px-6 rounded-xl border transition-all duration-300 ease-out flex items-center justify-center flex-shrink-0 snap-start
+                  ${isActive 
+                    ? "bg-card border-primary/50 shadow-lg shadow-black/10 scale-105 z-10" 
+                    : "bg-transparent border-transparent hover:bg-card/50 hover:border-border/50"
+                  }
+                  ${!isRelevant && !isActive ? "opacity-40 grayscale hover:opacity-100 hover:grayscale-0" : "opacity-100"}
+                `}
+              >
+                <img
+                  src={client.logo || "/placeholder.svg"}
+                  alt={client.name}
+                  className={`
+                    h-5 md:h-6 w-auto object-contain transition-all duration-300
+                    ${isActive ? "brightness-100 contrast-125" : "brightness-0 invert opacity-60 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100"}
+                  `}
+                />
+              </button>
+            )
+          })}
+        </div>
 
-            {/* Placeholder overlay */}
-            {activeClient?.modelUrl.includes("example.com") && (
-              <div className="absolute inset-0 flex items-center justify-center bg-background/95 backdrop-blur-sm">
-                <div className="text-center space-y-4">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-base text-foreground font-medium">3D Model Viewer</p>
-                    <p className="text-sm text-muted-foreground mt-1">{activeClient?.name}</p>
-                  </div>
+        {/* 3. The Viewer */}
+        <motion.div
+          layout
+          className="w-full max-w-6xl relative"
+        >
+          {/* UPDATED: Changed md:max-h-[420px] to md:h-[500px] 
+             - This increases height to 500px (better visibility)
+             - Still smaller than original 600px
+             - Removed aspect-video on desktop to enforce this exact height
+          */}
+          <div className="relative w-full h-[300px] md:h-[500px] rounded-[24px] overflow-hidden border border-border/40 bg-card/20 shadow-2xl">
+            
+            {/* Top Bar */}
+            <div className="absolute top-0 left-0 right-0 h-10 md:h-12 bg-background/80 backdrop-blur-md border-b border-white/5 flex items-center px-4 justify-between z-20">
+               <div className="flex gap-2">
+                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-500/20 border border-red-500/50" />
+                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-500/20 border border-green-500/50" />
+               </div>
+               <div className="px-3 py-1 rounded-full bg-white/5 text-[9px] md:text-xs text-muted-foreground uppercase tracking-widest font-medium border border-white/5">
+                 Live Preview • {activeClient?.name}
+               </div>
+               <div className="w-10" /> 
+            </div>
+
+            {/* Iframe Container */}
+            <motion.div
+              key={activeClient?.modelUrl}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="w-full h-full pt-10 md:pt-12 bg-black/50"
+            >
+              <iframe
+                src={activeClient?.modelUrl}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+              
+              {activeClient?.modelUrl.includes("example.com") && (
+                <div className="absolute inset-0 flex items-center justify-center pt-12">
+                   <p className="text-muted-foreground">Interactive 3D Demo</p>
                 </div>
-              </div>
-            )}
-          </motion.div>
-        </div>
+              )}
+            </motion.div>
+          </div>
+        </motion.div>
+        
       </div>
     </section>
   )

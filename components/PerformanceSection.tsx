@@ -58,14 +58,12 @@ export default function PerformanceSection() {
   return (
     <section className="relative py-[40px] md:py-[80px] lg:py-[90px] bg-background">
       <div className="w-[95%] max-w-7xl mx-auto">
-        {/* Title - Two lines */}
         <h2 className="text-3xl md:text-5xl lg:text-6xl font-light text-center text-foreground mb-16 font-display">
           <span className="block font-medium">Load millions of time.</span>
           <span className="block mt-2 font-medium">Low Costs. Zero Lag.</span>
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-          {/* Left Card - Features List */}
           <CardContainer className="w-full h-full">
             <CardBody className="relative group/card bg-[#1A1A1A] rounded-2xl p-8 md:p-10 border border-border/50 hover:shadow-2xl hover:shadow-emerald-500/[0.1] transition-shadow duration-300 min-h-[400px] flex flex-col">
               <CardItem translateZ="50" className="w-full flex-1 flex items-center justify-center">
@@ -75,7 +73,6 @@ export default function PerformanceSection() {
                       <div className="text-primary [&_svg]:w-6 [&_svg]:h-6">
                         <feature.icon />
                       </div>
-
                       <div className="w-full">
                         <h3 className="text-lg font-semibold text-foreground mb-1.5 leading-tight">{feature.title}</h3>
                         <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
@@ -87,18 +84,20 @@ export default function PerformanceSection() {
             </CardBody>
           </CardContainer>
 
-          {/* Right Card - Visual Container */}
           <CardContainer className="w-full h-full">
             <CardBody className="relative group/card bg-[#1A1A1A] rounded-2xl p-8 md:p-10 border border-border/50 hover:shadow-2xl hover:shadow-emerald-500/[0.1] transition-shadow duration-300 min-h-[400px] flex flex-col">
-              <CardItem translateZ="50" className="w-full flex-1 flex flex-col">
-                {/* Title */}
+              <CardItem translateZ="50" className="w-full h-full flex flex-col">
                 <h3 className="text-xl font-semibold text-foreground mb-6">Same performance across all Devices.</h3>
 
-                <div className="w-full flex-1 rounded-xl overflow-hidden bg-black/20 flex items-center justify-center h-[180px]">
+                {/* CHANGE HEIGHT HERE: 
+                   Currently set to min-h-[250px]. 
+                   Change 250px to 300px or 350px if you want the box taller.
+                */}
+                <div className="w-full flex-1 rounded-xl overflow-hidden bg-black/20 relative min-h-[250px]">
                   <img
-                    src="/placeholder.svg?height=400&width=600"
+                    src="/asset/allDevices.jpg"
                     alt="Performance across devices"
-                    className="w-auto h-auto object-contain max-w-[80%] max-h-[160px]"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
               </CardItem>
