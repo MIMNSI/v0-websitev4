@@ -4,21 +4,36 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import TextScroller from "@/components/TextScroller"
+import Particles from "@/components/ui/particles"
+
+// Defined OUTSIDE the component to prevent re-renders of the Particles canvas
+const heroParticleColors = ["#2DFFA7", "#2DFFA7"];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col pt-24 md:pt-28 pb-12 md:pb-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-radial from-[#1a4d3a] via-[#0d2619] to-[#050a08]" />
+    <section className="relative min-h-screen flex flex-col pt-24 md:pt-28 pb-12 md:pb-20 overflow-hidden bg-black">
+      {/* Particles Background */}
+      <div className="absolute inset-0 z-0">
+        <Particles
+          particleColors={heroParticleColors}
+          particleCount={400}
+          particleSpread={30}
+          speed={0.1}
+          particleBaseSize={200}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
+          className="w-full h-full"
+        />
+      </div>
 
       {/* Content Container */}
       <div className="relative z-10 container mx-auto px-4 md:px-6 flex-1 flex flex-col justify-center">
         <div className="max-w-[1400px] mx-auto w-full">
-          
           <div className="flex flex-col items-center justify-center">
-            
             <div className="w-full max-w-4xl mx-auto text-center">
               
-              {/* Badge - Increased bottom margin (mb-8 md:mb-10) to prevent visual crowding */}
+              {/* Badge */}
               <div className="inline-flex items-center gap-0 rounded-full border border-white/20 bg-[#1a1a1a]/60 backdrop-blur-sm py-1 md:py-1.5 mb-8 md:mb-10 lg:py-1.5 px-px pr-0.5 mx-auto">
                 <div className="rounded-full bg-white px-2.5 py-1 ml-0.5 md:ml-[6px] md:px-3 lg:px-1.5 lg:py-0.5">
                   <span className="text-xs md:text-sm lg:text-[14px] font-medium text-black whitespace-nowrap">
@@ -32,31 +47,28 @@ export default function Hero() {
 
               {/* Heading */}
               <h1 className="text-4xl md:text-5xl lg:text-[78px] font-light mb-8 md:mb-12 leading-tight font-sans text-center">
-                
-                {/* SOLUTION: Added a specific container <div> for the scroller.
-                   - h-[1.2em]: Restricts height to exactly one line of text.
-                   - overflow-hidden: Cuts off any text sliding in/out.
-                   - flex/justify-center: Keeps the text centered.
-                */}
+                {/* First Line: Text Scroller */}
                 <div className="relative h-[1.2em] w-full overflow-hidden flex justify-center items-center mb-2 md:mb-4">
                   <span className="text-white/80">
-                    <TextScroller 
+                    <TextScroller
                       words={[
                         "Everything",
                         "Buildings",
                         "Landscapes",
                         "Interiors",
                         "Inventory",
-                        "Automobile"
+                        "Automobile",
                       ]}
                     />
                   </span>
                 </div>
-                
+
                 {/* Second Line: Static Text */}
                 <span className="block">
                   <span className="text-white">to 3D with </span>
-                  <span className="bg-gradient-to-r from-[#2dffa7] to-[#1a8f65] bg-clip-text text-transparent">AI</span>
+                  <span className="bg-gradient-to-r from-[#2dffa7] to-[#1a8f65] bg-clip-text text-transparent">
+                    AI
+                  </span>
                 </span>
               </h1>
 
@@ -119,7 +131,6 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
