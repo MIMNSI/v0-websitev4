@@ -142,7 +142,7 @@ Our platform efficiently handles all files, and every 3D model is optimized for 
       {
         question: "Can I download and edit the 3D models?",
         answer:
-          "Yes! Download your models in multiple formats and import into any 3D editing software. We also offer one-click export plugins for Blender and Unity for seamless workflow integration. Please check our offerings for more info[click here]",
+          "Yes! Download your models in multiple formats and import into any 3D editing software. We also offer one-click export plugins for Blender and Unity for seamless workflow integration. Please check our offerings on the homepage for more info.",
       },
     ],
   },
@@ -152,8 +152,8 @@ Our platform efficiently handles all files, and every 3D model is optimized for 
       {
         question: "Do you offer free trials?",
         answer: `Yes, we offer both Free and Paid plans.
-• Free plan: Great for 3D artists and hobbyists. Includes essential features like object creation, shiny/complex objects, basic exports, same-day turnaround, and email support.
-• Paid plan: Designed for professional and enterprise use. Unlocks advanced features such as large space capture, additional 3D technologies (like Gaussian Splats), branding customization, advanced analytics, unlimited upload size, priority feature requests, and full tech support.`,
+• Free plan: Great for 3D artists and hobbyists. Includes essential features like small to medium objects 3D creation, supports shiny/complex objects, basic exports, same-day turnaround, and email support.
+• Paid plan: Designed for professional and enterprise use. Unlocks advanced features such as large objects(Bikes, furniture, etc.) and large space captures, additional 3D technologies (like Gaussian Splats), branding customization, advanced analytics, unlimited upload size, priority feature requests, and full tech support.`,
       },
       {
         question: "How is pricing determined?",

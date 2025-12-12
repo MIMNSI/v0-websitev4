@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { PlayCircle, X } from "lucide-react"; // Import necessary icons
+import { PlayCircle, X, Loader2 } from "lucide-react"; // Import necessary icons
 
-// --- Data (Keep the data as is) ---
+// -- Data --
 const industries = [
   { id: "residential", name: "Residential" },
   { id: "travel", name: "Travel & Hospitality" },
@@ -54,6 +54,9 @@ const allClients = [
       "https://mimnsi.github.io/interactive_scenes_3d_estate_2/demo/WL00096_LaStona.html",
   },
 ];
+
+// Define the threshold for desktop (e.g., tailwind's 'md' breakpoint is 768px)
+const DESKTOP_BREAKPOINT = 768;
 
 // --- 3D Viewer Modal Component ---
 interface ViewerModalProps {
@@ -113,22 +116,38 @@ const ViewerModal: React.FC<ViewerModalProps> = ({
 export default function ProductionSection() {
   const [activeIndustry, setActiveIndustry] = useState(industries[0].id);
   const [activeClientId, setActiveClientId] = useState(allClients[0].id);
-  // NEW STATE: Controls the fullscreen 3D modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // NEW STATE: To track if the device is large enough for direct load
+  const [isDesktop, setIsDesktop] = useState(true);
+  const [isReady, setIsReady] = useState(false); // Used to prevent flashing on first load
+
+  // --- Effect to determine device size ---
+  useEffect(() => {
+    // Check size once on mount
+    const handleResize = () => {
+      // Set to false if window width is less than the desktop breakpoint (e.g., 768px)
+      setIsDesktop(window.innerWidth >= DESKTOP_BREAKPOINT);
+      setIsReady(true);
+    };
+
+    handleResize(); // Initial check
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const activeClient = useMemo(
     () => allClients.find((client) => client.id === activeClientId),
     [activeClientId]
   );
 
-  // Handler to open the modal
   const openModal = useCallback(() => {
     if (activeClient?.modelUrl) {
       setIsModalOpen(true);
     }
   }, [activeClient]);
 
-  // Handler to close the modal
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
   }, []);
@@ -151,17 +170,67 @@ export default function ProductionSection() {
     }
   };
 
-  if (!activeClient) return null; // Should not happen
+  if (!activeClient || !isReady) {
+    // Render a simple loading/skeleton state until the device check is complete
+    return (
+      <section className="flex justify-center items-center min-h-screen bg-black">
+        <Loader2 className="w-8 h-8 text-primary animate-spin" />
+      </section>
+    );
+  }
 
+  // --- Conditional Viewer Content ---
+  const ViewerContent = isDesktop ? (
+    // 1. DESKTOP VIEW: Direct Iframe Load
+    <motion.div
+      key={activeClient.modelUrl}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="w-full h-full pt-10 md:pt-12 bg-black/50"
+    >
+      <iframe
+        src={activeClient.modelUrl}
+        className="w-full h-full"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </motion.div>
+  ) : (
+    // 2. MOBILE/TABLET VIEW: Interactive Card/Button (for Modal)
+    <div className="w-full h-full pt-10 md:pt-12 flex items-center justify-center bg-black/50">
+      <div className="flex flex-col items-center justify-center text-center p-8">
+        <img
+          src={activeClient.logo || "/placeholder.svg"}
+          alt={`${activeClient.name} Demo`}
+          className="w-24 h-24 md:w-32 md:h-32 object-contain brightness-0 invert opacity-60 mb-4"
+        />
+        <p className="text-white/50 mb-6 text-sm md:text-base">
+          Tap "View 3D" to launch the interactive model.
+        </p>
+        <button
+          onClick={openModal}
+          className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-black font-semibold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+        >
+          <PlayCircle className="w-5 h-5" />
+          View Interactive 3D
+        </button>
+      </div>
+    </div>
+  );
+
+  // --- Main Render ---
   return (
     <section className="relative w-full min-h-screen bg-background flex flex-col justify-center py-8 md:py-12 lg:py-16 overflow-hidden">
-      {/* --- 3D VIEWER MODAL --- */}
-      <ViewerModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        url={activeClient.modelUrl}
-        clientName={activeClient.name}
-      />
+      {/* --- 3D VIEWER MODAL (Only needed for non-desktop) --- */}
+      {!isDesktop && (
+        <ViewerModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          url={activeClient.modelUrl}
+          clientName={activeClient.name}
+        />
+      )}
 
       {/* --- TOP FADE FROM HERO --- */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none" />
@@ -275,7 +344,7 @@ export default function ProductionSection() {
           })}
         </div>
 
-        {/* 3. The Viewer Container (Replaced with interactive card) */}
+        {/* 3. The Viewer Container (Now uses the conditional ViewerContent) */}
         <motion.div layout className="w-full max-w-6xl relative">
           <div className="relative w-full h-[300px] md:h-[500px] rounded-[24px] overflow-hidden border border-border/40 bg-card/20 shadow-2xl">
             {/* Top Bar (Keep for styling consistency) */}
@@ -286,35 +355,13 @@ export default function ProductionSection() {
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-green-500/20 border border-green-500/50" />
               </div>
               <div className="px-3 py-1 rounded-full bg-white/5 text-[9px] md:text-xs text-muted-foreground uppercase tracking-widest font-medium border border-white/5">
-                Preview • {activeClient.name}
+                {isDesktop ? "Live Preview" : "Preview"} • {activeClient.name}
               </div>
               <div className="w-10" />
             </div>
 
-            {/* **NEW: Interactive Viewport** */}
-            <div className="w-full h-full pt-10 md:pt-12 flex items-center justify-center bg-black/50">
-              <div className="flex flex-col items-center justify-center text-center p-8">
-                {/* Placeholder for the model (e.g., a static image of the model) */}
-                <img
-                  src={activeClient.logo || "/placeholder.svg"}
-                  alt={`${activeClient.name} Demo`}
-                  className="w-24 h-24 md:w-32 md:h-32 object-contain brightness-0 invert opacity-60 mb-4"
-                />
-
-                <p className="text-white/50 mb-6 text-sm md:text-base">
-                  Tap "View 3D" to launch the interactive model.
-                </p>
-
-                {/* The "View 3D" button */}
-                <button
-                  onClick={openModal}
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-black font-semibold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-                >
-                  <PlayCircle className="w-5 h-5" />
-                  View Interactive 3D
-                </button>
-              </div>
-            </div>
+            {/* CONDITIONAL CONTENT: Desktop gets the iframe, Mobile gets the button */}
+            {ViewerContent}
           </div>
         </motion.div>
       </div>
