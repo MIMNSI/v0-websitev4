@@ -210,7 +210,7 @@ export default function ContactPage() {
                               href="tel:+91xxxxxxxxxx"
                               className="text-white/60 hover:text-primary transition-colors"
                             >
-                              +91xxxxxxxxxx
+                              +91 9130971867
                             </a>
                           </div>
                         </div>

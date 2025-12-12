@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
-
 interface Model3DProps {
   opacity: number;
 }
 
 export const Model3D = ({ opacity }: Model3DProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+  const modelSrc = "/models/output.glb";
 
   useEffect(() => {
+    // 1. Inject the model-viewer script from unpkg
     const script = document.createElement("script");
-    script.src = "https://scripts.sirv.com/sirvjs/v3/sirv.js?modules=model";
+    script.type = "module";
+    script.src =
+      "https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js";
     script.async = true;
 
-    // Simulate loading completion or wait for script load
     script.onload = () => {
-      // Give it a moment to initialize the viewer
-      setTimeout(() => setIsLoaded(true), 1000);
+      // Set the flag once the script is available
+      setIsScriptLoaded(true);
     };
 
-    document.body.appendChild(script);
+    // Append to document head (best practice for scripts)
+    document.head.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      document.head.removeChild(script);
     };
   }, []);
 
@@ -31,26 +34,34 @@ export const Model3D = ({ opacity }: Model3DProps) => {
       className="relative w-full h-full flex items-center justify-center pointer-events-auto"
       style={{ opacity }}
     >
-      {/* Loading State */}
-      {!isLoaded && (
+      {/* Loading State: Shows the skeleton while the script is loading */}
+      {!isScriptLoaded && (
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <Skeleton className="w-64 h-64 rounded-xl bg-muted/20 animate-pulse" />
         </div>
       )}
 
-      {/* Sirv Container */}
-      <div
-        className={`Sirv transition-opacity duration-700 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <div
-          data-src="https://demo.sirv.com/model.glb"
-          data-options="zoom: false; mousewheel: false; hint: false; autospin: false;"
-          style={{ width: "100%", height: "100%" }}
-        ></div>
-      </div>
+      {/* Model-Viewer Component: Only renders once the script is loaded */}
+      {isScriptLoaded && (
+        <model-viewer
+          src={modelSrc} // Your local GLB file path
+          alt="3D Model"
+          shadow-intensity="1"
+          camera-controls // Enables drag-to-rotate interaction
+          auto-rotate // Enables gentle automatic rotation
+          rotation-per-second="10deg"
+          style={{
+            width: "100%",
+            height: "100%",
+            transition: "opacity 0.7s",
+          }}
+          // Model Viewer automatically centers and fits the model by default.
+          // Add suppressHydrationWarning to potentially quiet client-side warnings if they appear
+          suppressHydrationWarning
+        >
+          {/* Optional: Add a custom loading indicator here if needed */}
+        </model-viewer>
+      )}
     </div>
   );
 };

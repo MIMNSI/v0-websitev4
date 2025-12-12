@@ -4,15 +4,14 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // ⚠️ NOTE: We are sending this to the 'contactus' endpoint for now
-    // to ensure it works immediately since we know that one is active.
-    // If you have a specific '/waitlist/create' URL later, change it here.
-    const BACKEND_URL = "https://api.metashopai.com/contactus/create";
+    // ✅ UPDATED: Pointing to the specific waitlist endpoint
+    const BACKEND_URL = "https://api.metashopai.com/waitlist/create";
 
     const res = await fetch(BACKEND_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // Mimic browser headers to prevent blocking
         "User-Agent":
           "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         Origin: "https://metashopai.com",
