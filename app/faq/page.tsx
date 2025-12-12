@@ -1,12 +1,17 @@
-"use client"
+"use client";
 
-import { useState, useMemo } from "react"
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import Image from "next/image"
-import NewHeader from "@/components/NewHeader"
-import { Footer } from "@/components/Footer"
+import { useState, useMemo } from "react";
+import { Search, Phone, Mail } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
+import Image from "next/image";
+import NewHeader from "@/components/NewHeader";
 
 // FAQ data structure from the provided table
 const faqData = [
@@ -245,16 +250,16 @@ Studies show 3D reduces returns by up to 40%.`,
       },
     ],
   },
-]
+];
 
 export default function FAQPage() {
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState("");
 
   // Filter FAQs based on search query
   const filteredFaqData = useMemo(() => {
-    if (!searchQuery.trim()) return faqData
+    if (!searchQuery.trim()) return faqData;
 
-    const query = searchQuery.toLowerCase()
+    const query = searchQuery.toLowerCase();
     return faqData
       .map((category) => ({
         ...category,
@@ -262,11 +267,11 @@ export default function FAQPage() {
           (faq) =>
             faq.question.toLowerCase().includes(query) ||
             faq.answer.toLowerCase().includes(query) ||
-            category.category.toLowerCase().includes(query),
+            category.category.toLowerCase().includes(query)
         ),
       }))
-      .filter((category) => category.faqs.length > 0)
-  }, [searchQuery])
+      .filter((category) => category.faqs.length > 0);
+  }, [searchQuery]);
 
   return (
     <>
@@ -283,14 +288,15 @@ export default function FAQPage() {
         <div className="relative z-10 container mx-auto px-4 py-24 md:py-32 max-w-5xl">
           {/* Header Section */}
           <div className="text-center mb-12 md:mb-16">
-            <h1 className="font-sans ts-h2 md:ts-h1 mb-4 text-white">Frequently Asked Questions</h1>
+            <h1 className="font-sans ts-h2 md:ts-h1 mb-4 text-white">
+              Frequently Asked Questions
+            </h1>
             <p className="font-sans ts-body1 text-muted max-w-2xl mx-auto mb-8">
               Everything you need to know about MetaShop AI in one place.
             </p>
 
             {/* Search Bar */}
             <div className="relative max-w-xl mx-auto">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none" />
               <Input
                 type="text"
                 placeholder="Search FAQs by keywords or categories..."
@@ -298,6 +304,7 @@ export default function FAQPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="font-sans pl-12 pr-4 py-6 text-base bg-dark/50 border-medium/50 focus:border-primary/50 focus:ring-primary/20 backdrop-blur-sm"
               />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted pointer-events-none" />
             </div>
           </div>
 
@@ -305,7 +312,10 @@ export default function FAQPage() {
           <div className="space-y-8">
             {filteredFaqData.length > 0 ? (
               filteredFaqData.map((category, categoryIndex) => (
-                <div key={categoryIndex} className="bg-dark/30 backdrop-blur-sm rounded-xl border border-medium/30 p-6">
+                <div
+                  key={categoryIndex}
+                  className="bg-dark/30 backdrop-blur-sm rounded-xl border border-medium/30 p-6"
+                >
                   <h2 className="font-sans font-medium text-[20px] md:text-[24px] lg:text-[28px] text-primary mb-6">
                     {category.category}
                   </h2>
@@ -321,21 +331,9 @@ export default function FAQPage() {
                           {faq.question}
                         </AccordionTrigger>
                         <AccordionContent className="font-sans ts-body2 text-light space-y-4">
-                          <div className="whitespace-pre-line text-base">{faq.answer}</div>
-                          {faq.image && (
-                            <div className="mt-4 p-4 bg-medium/20 rounded-lg border border-medium/30">
-                              <div className="flex items-center gap-3 text-muted ts-caption">
-                                <Image
-                                  src="/placeholder.svg?height=24&width=24"
-                                  alt="Image placeholder"
-                                  width={24}
-                                  height={24}
-                                  className="opacity-50"
-                                />
-                                <span className="italic">{faq.image}</span>
-                              </div>
-                            </div>
-                          )}
+                          <div className="whitespace-pre-line text-base">
+                            {faq.answer}
+                          </div>
                         </AccordionContent>
                       </AccordionItem>
                     ))}
@@ -344,7 +342,9 @@ export default function FAQPage() {
               ))
             ) : (
               <div className="text-center py-16">
-                <p className="font-sans ts-body1 text-muted">No FAQs found matching your search query.</p>
+                <p className="font-sans ts-body1 text-muted">
+                  No FAQs found matching your search query.
+                </p>
                 <button
                   onClick={() => setSearchQuery("")}
                   className="font-sans mt-4 ts-body2 text-primary hover:underline"
@@ -355,22 +355,69 @@ export default function FAQPage() {
             )}
           </div>
 
-          {/* Contact CTA */}
-          <div className="mt-16 text-center p-8 bg-dark/30 backdrop-blur-sm rounded-xl border border-medium/30">
-            <h3 className="font-sans ts-h4 mb-4 text-white">Still have questions?</h3>
-            <p className="font-sans ts-body1 text-light mb-6">
-              Our team is here to help. Reach out to us for personalized assistance.
-            </p>
-            <a
-              href="mailto:info@metashopai.com"
-              className="font-sans inline-block px-6 py-3 bg-primary text-background font-semibold rounded-lg hover:bg-primary/90 transition-colors ts-button"
-            >
-              Contact Support
-            </a>
+          {/* Contact CTA - UPDATED with Center Aligned & Full Width Cards */}
+          <div className="mt-16">
+            <div className="text-center mb-8">
+              <h3 className="font-sans ts-h4 mb-4 text-white">
+                Still have questions?
+              </h3>
+              <p className="font-sans ts-body1 text-light">
+                Our team is here to help. Reach out to us for personalized
+                assistance.
+              </p>
+            </div>
+
+            {/* Changed from max-w-3xl to w-full to match FAQ width */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+              {/* Call us block */}
+              <CardContainer className="w-full">
+                <CardBody className="relative group/card bg-[#1A1A1A] rounded-2xl p-6 border border-border/50 hover:shadow-2xl hover:shadow-emerald-500/[0.1] transition-shadow duration-300 h-auto">
+                  <CardItem translateZ="50" className="w-full">
+                    {/* Changed items-start to items-center and added text-center */}
+                    <div className="flex flex-col items-center text-center space-y-4 w-full">
+                      <Phone className="w-8 h-8 text-primary" />
+                      <div className="flex flex-col items-center">
+                        <h3 className="text-xl font-bold text-white mb-2">
+                          Call us
+                        </h3>
+                        <a
+                          href="tel:+91xxxxxxxxxx"
+                          className="text-white/60 hover:text-primary transition-colors"
+                        >
+                          +91xxxxxxxxxx
+                        </a>
+                      </div>
+                    </div>
+                  </CardItem>
+                </CardBody>
+              </CardContainer>
+
+              {/* Mail us block */}
+              <CardContainer className="w-full">
+                <CardBody className="relative group/card bg-[#1A1A1A] rounded-2xl p-6 border border-border/50 hover:shadow-2xl hover:shadow-emerald-500/[0.1] transition-shadow duration-300 h-auto">
+                  <CardItem translateZ="50" className="w-full">
+                    {/* Changed items-start to items-center and added text-center */}
+                    <div className="flex flex-col items-center text-center space-y-4 w-full">
+                      <Mail className="w-8 h-8 text-primary" />
+                      <div className="flex flex-col items-center">
+                        <h3 className="text-xl font-bold text-white mb-2">
+                          Mail us at
+                        </h3>
+                        <a
+                          href="mailto:info@metashopai.com"
+                          className="text-white/60 hover:text-primary transition-colors break-all"
+                        >
+                          info@metashopai.com
+                        </a>
+                      </div>
+                    </div>
+                  </CardItem>
+                </CardBody>
+              </CardContainer>
+            </div>
           </div>
         </div>
       </div>
-      <Footer />
     </>
-  )
+  );
 }
