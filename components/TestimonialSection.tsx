@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function TestimonialSection() {
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const testimonial = {
     text: `MetaShop AI made it incredibly easy to bring our sample flats online. They managed the entire process end-to-end and always improved based on our feedback. The result? Virtual tours that feel immersive, polished, and true to our brand.`,
     author: "L&T Realty Team",
     videoUrl: "https://placeholder-video-url.com", // Will be replaced with actual video URL
-  }
+  };
 
   return (
     <section className="relative py-[40px] md:py-[80px] lg:py-[90px] bg-background overflow-hidden">
@@ -27,27 +27,31 @@ export default function TestimonialSection() {
             {/* Subtle gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
 
+            {/* UPDATED LOGO IMAGE: Made ~25% bigger on all screens */}
             <Image
-              src="/logos/lnt-realty.webp"
+              src="/logos/lnt-logo-white.png"
               alt="L&T Realty"
-              width={250}
-              height={80}
-              className="relative z-10 object-contain w-[130px] sm:w-[150px] lg:w-[250px]"
+              width={350}
+              height={120}
+              className="relative z-10 object-contain w-[160px] sm:w-[190px] lg:w-[320px] brightness-0 invert"
             />
           </div>
 
           <div className="space-y-6">
             <blockquote className="space-y-6">
+              {/* Added quotes &quot; around the text */}
               <p className="leading-normal text-foreground/90 font-light text-lg sm:text-base lg:text-3xl">
-                {testimonial.text}
+                &quot;{testimonial.text}&quot;
               </p>
               <footer className="pt-2">
-                <cite className="not-italic text-lg text-primary font-medium">— {testimonial.author}</cite>
+                <cite className="not-italic text-lg text-primary font-medium">
+                  — {testimonial.author}
+                </cite>
               </footer>
             </blockquote>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

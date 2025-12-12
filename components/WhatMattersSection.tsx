@@ -1,46 +1,52 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { GlowingEffect } from "@/components/ui/glowing-effect"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 const features = [
   {
     id: "ar-vr",
     title: "3D, AR & VR – Visualization Ready",
-    description: "Your 3D assets adapt instantly to AR and VR environments — optimized for every platform and device.",
-    image: "/asset/ar-vr.jpg",
+    description:
+      "Your 3D assets adapt instantly to AR and VR environments — optimized for every platform and device.",
+    // Already jpg
+    image: "/images/ar-vr.jpg",
   },
   {
     id: "dimensional",
     title: "Dimensionally Accurate",
     description:
       "Scaled to real-world measurements with precision you can trust — perfect for eCommerce, architecture, and design workflows.",
-    image: "/asset/dimensional.jpg",
+    // Already jpg
+    image: "/images/dimensional.jpg",
   },
   {
     id: "any-surface",
     title: "Any Surface to 3D",
     description:
       "Transparent, reflective, or textured — we turn every surface into high-fidelity 3D, ready for clean visualization.",
-    image: "/asset/any-surface.jpg",
+    // Already jpg
+    image: "/images/any-surface.jpg",
   },
   {
     id: "customise",
     title: "Customise Your Interactive 3D Viewer",
     description:
       "Add your brand logos, CTAs, labels, and hotspot interactions — tailor every 3D experience to your audience.",
-    image: "/asset/customise.jpg",
+    // Already jpg (Renamed to avoid conflict)
+    image: "/images/customise-feature.jpg",
   },
   {
     id: "analytics",
     title: "Built-in Viewer Analytics",
     description:
       "Track interactions, time spent, and engagement directly in your 3D viewer — actionable insights for marketing and performance tracking.",
-    image: "/asset/analytics.jpg",
+    // Already jpg
+    image: "/images/analytics.jpg",
   },
-]
+];
 
 const embedTabs = [
   {
@@ -49,7 +55,8 @@ const embedTabs = [
     title: "Embed in just 5 mins. Share in 1-click.",
     description:
       "Copy and paste your 3D model link anywhere — websites, social media, or eCommerce platforms. No setup, no code.",
-    image: "/asset/embed.png",
+    // UPDATED: Changed .png to .jpg
+    image: "/images/embed.jpg",
   },
   {
     id: "download",
@@ -57,20 +64,23 @@ const embedTabs = [
     title: "Download. Import. Edit Anywhere.",
     description:
       "Download your preferred file format and import into any 3D editing software to continue editing with ease.",
-    image: "/placeholder.svg?height=400&width=600",
+    // UPDATED: Changed .png to .jpg
+    image: "/images/download.jpg",
   },
   {
     id: "plugins",
     name: "Plugins",
     title: "One-Click Export to Blender & Unity.",
-    description: "Directly export your 3D assets using our plugin — quick setup, smooth workflow.",
-    image: "/asset/plugins.png",
+    description:
+      "Directly export your 3D assets using our plugin — quick setup, smooth workflow.",
+    // UPDATED: Changed .png to .jpg
+    image: "/images/plugins.jpg",
   },
-]
+];
 
 export default function WhatMattersSection() {
-  const [activeTab, setActiveTab] = useState(embedTabs[0].id)
-  const activeTabContent = embedTabs.find((tab) => tab.id === activeTab)
+  const [activeTab, setActiveTab] = useState(embedTabs[0].id);
+  const activeTabContent = embedTabs.find((tab) => tab.id === activeTab);
 
   return (
     <section className="relative min-h-screen bg-background py-[40px] md:py-[80px] lg:py-[90px]">
@@ -78,7 +88,9 @@ export default function WhatMattersSection() {
         {/* Overline */}
         <div className="flex justify-center mb-3">
           <div className="inline-flex items-center gap-2 rounded-full bg-[#1A1A1A] backdrop-blur-sm border border-border/50 h-[34px] px-4">
-            <span className="text-xs font-medium text-muted-foreground/80">One AI pipeline. Many use cases.</span>
+            <span className="text-xs font-medium text-muted-foreground/80">
+              One AI pipeline. Many use cases.
+            </span>
           </div>
         </div>
 
@@ -105,7 +117,13 @@ export default function WhatMattersSection() {
           {/* Row 3: 1 card with tabs - spans all 6 columns */}
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-card">
-              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={64}
+                inactiveZone={0.01}
+              />
 
               <div className="relative flex h-full flex-col gap-4 rounded-xl border border-border/50 bg-background p-6 md:p-8 shadow-sm">
                 {/* Tabs */}
@@ -132,7 +150,11 @@ export default function WhatMattersSection() {
                           <motion.div
                             layoutId="embedTabUnderline"
                             className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                            transition={{
+                              type: "spring",
+                              bounce: 0.2,
+                              duration: 0.6,
+                            }}
                           />
                         )}
                       </button>
@@ -159,7 +181,9 @@ export default function WhatMattersSection() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground">{activeTabContent?.title}</h3>
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground">
+                    {activeTabContent?.title}
+                  </h3>
 
                   {/* Description */}
                   <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
@@ -172,17 +196,20 @@ export default function WhatMattersSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
   return (
     <div className="relative rounded-2xl border p-2 md:rounded-3xl md:p-3 bg-card h-full">
-      <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+      <GlowingEffect
+        spread={40}
+        glow={true}
+        disabled={false}
+        proximity={64}
+        inactiveZone={0.01}
+      />
 
-      {/* UPDATED: Removed 'lg:grayscale', 'lg:hover:grayscale-0' and transition classes.
-         The card is now standard full color at all times.
-      */}
       <div className="relative rounded-xl border border-border/50 bg-background p-6 md:p-8 shadow-sm h-full min-h-[400px] flex flex-col">
         <div className="w-full aspect-video rounded-xl overflow-hidden bg-muted/30 flex-shrink-0">
           <Image
@@ -195,11 +222,15 @@ function FeatureCard({ feature }: { feature: (typeof features)[0] }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-xl md:text-2xl font-semibold text-foreground mt-4">{feature.title}</h3>
+        <h3 className="text-xl md:text-2xl font-semibold text-foreground mt-4">
+          {feature.title}
+        </h3>
 
         {/* Description */}
-        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mt-4">{feature.description}</p>
+        <p className="text-sm md:text-base text-muted-foreground leading-relaxed mt-4">
+          {feature.description}
+        </p>
       </div>
     </div>
-  )
+  );
 }

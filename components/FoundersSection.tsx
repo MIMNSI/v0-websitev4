@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FoundersSection() {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <section className="relative py-[40px] md:py-[80px] lg:py-[90px] bg-background">
@@ -16,16 +16,8 @@ export default function FoundersSection() {
           transition={{ duration: 0.8 }}
           className="relative"
         >
-          <motion.div
-            animate={{
-              height: isExpanded ? "auto" : "auto",
-            }}
-            transition={{
-              duration: 0.8,
-              ease: [0.2, 0.9, 0.2, 1],
-            }}
-            className="group relative overflow-hidden rounded-[32px] bg-black border-2 border-white/20 shadow-[0_0_30px_rgba(255,255,255,0.15),0_2px_12px_rgba(0,0,0,0.1)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.2),0_4px_16px_rgba(0,0,0,0.15)] hover:-translate-y-0.5 will-change-transform"
-          >
+          {/* FIXED: Removed 'animate={{ height }}' to prevent scroll locking */}
+          <div className="group relative overflow-hidden rounded-[32px] bg-black border-2 border-white/15 shadow-[0_0_10px_rgba(255,255,255,0.15),0_2px_12px_rgba(0,0,0,0.1)] transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.2),0_4px_16px_rgba(0,0,0,0.15)] hover:-translate-y-0.5">
             <div className="absolute inset-0 opacity-100 transition-opacity duration-300">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[length:4px_4px]" />
             </div>
@@ -38,8 +30,9 @@ export default function FoundersSection() {
 
               {/* Summary - Always Visible */}
               <p className="text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90 font-light mb-8 max-w-4xl">
-                We didn't just reimagine 3D — we eliminated every barrier between your products and stunning digital
-                experiences, building a solution that works for you, not the other way around.
+                We didn't just reimagine 3D — we eliminated every barrier
+                between your products and stunning digital experiences, building
+                a solution that works for you, not the other way around.
               </p>
 
               {/* Expandable Content */}
@@ -57,11 +50,14 @@ export default function FoundersSection() {
                   >
                     <div className="space-y-4 text-sm md:text-base lg:text-lg leading-normal text-neutral-300 pt-4 border-t border-white/10 max-w-5xl">
                       <p className="text-white/90">
-                        From Day 1, our vision was clear: Make 3D as simple as sending a file — and as powerful as
-                        telling a brand story.
+                        From Day 1, our vision was clear: Make 3D as simple as
+                        sending a file — and as powerful as telling a brand
+                        story.
                       </p>
 
-                      <p>We saw how difficult it was for businesses to deal with:</p>
+                      <p>
+                        We saw how difficult it was for businesses to deal with:
+                      </p>
 
                       <ul className="space-y-2 pl-6">
                         <li className="flex items-start gap-3">
@@ -70,47 +66,69 @@ export default function FoundersSection() {
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-primary">•</span>
-                          <span>Inconsistent 3D quality across objects and spaces</span>
+                          <span>
+                            Inconsistent 3D quality across objects and spaces
+                          </span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-primary">•</span>
-                          <span>Capture footage themselves often with expensive gear</span>
+                          <span>
+                            Capture footage themselves often with expensive gear
+                          </span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-primary">•</span>
-                          <span>Shiny, reflective, or complex surfaces entirely skipped</span>
+                          <span>
+                            Shiny, reflective, or complex surfaces entirely
+                            skipped
+                          </span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-primary">•</span>
-                          <span>Tedious workflows just to get "production-ready" results</span>
+                          <span>
+                            Tedious workflows just to get "production-ready"
+                            results
+                          </span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-primary">•</span>
-                          <span>Generic 3D outputs that lack branding or customization</span>
+                          <span>
+                            Generic 3D outputs that lack branding or
+                            customization
+                          </span>
                         </li>
                       </ul>
 
                       <p className="text-white/90 font-medium">
-                        So we reimagined the entire pipeline — not just the tech.
+                        So we reimagined the entire pipeline — not just the
+                        tech.
                       </p>
 
-                      <p>We created a platform where you record — or we do — and everything else is fully handled.</p>
-
                       <p>
-                        Whether you're showcasing a 500 sq ft room or a detailed automotive part, whether you're a
-                        realtor, a retailer, or a manufacturer — your brand needs more than just a scan.
+                        We created a platform where you record — or we do — and
+                        everything else is fully handled.
                       </p>
 
-                      <p className="text-white/90 font-medium">It needs dimension, speed, and storytelling control.</p>
-
                       <p>
-                        That's why MetaShop delivers 3D built for business — fast, branded, interactive, and
-                        future-ready.
+                        Whether you're showcasing a 500 sq ft room or a detailed
+                        automotive part, whether you're a realtor, a retailer,
+                        or a manufacturer — your brand needs more than just a
+                        scan.
                       </p>
 
                       <p className="text-white/90 font-medium">
-                        And we're not stopping here. So here's what our researchers focused on delivering — so you don't
-                        have to.
+                        It needs dimension, speed, and storytelling control.
+                      </p>
+
+                      <p>
+                        That's why MetaShop delivers 3D built for business —
+                        fast, branded, interactive, and future-ready.
+                      </p>
+
+                      <p className="text-white/90 font-medium">
+                        And we're not stopping here. So here's what our
+                        researchers focused on delivering — so you don't have
+                        to.
                       </p>
                     </div>
                   </motion.div>
@@ -126,9 +144,9 @@ export default function FoundersSection() {
             </div>
 
             <div className="absolute inset-0 -z-10 rounded-[32px] p-px bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-100 transition-opacity duration-300" />
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
