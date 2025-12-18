@@ -60,7 +60,7 @@ export default function PricingSection() {
                     className="w-full h-full object-cover"
                   >
                     <source
-                      src="https://websitecreatives.s3.ap-south-1.amazonaws.com/Free_3D.mp4"
+                      src="https://websitecreativesmetashop.s3.eu-north-1.amazonaws.com/Free_3D.mp4"
                       type="video/mp4"
                     />
                   </video>

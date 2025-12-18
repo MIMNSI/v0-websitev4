@@ -52,6 +52,8 @@ export default function Hero() {
                         "Inventory",
                         "Automobile",
                       ]}
+                      interval={2000} // Normal speed for subsequent words
+                      initialDelay={3500} // Wait 3.5s on "Everything"
                     />
                   </span>
                 </div>
@@ -80,15 +82,13 @@ export default function Hero() {
                       Video to 3D
                     </h3>
 
-                    {/* HIDDEN: Book a Demo Button 
-                  <Link
-                    href="/contact"
-                    className="flex items-center justify-center gap-1.5 md:gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black px-3 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-colors w-fit whitespace-nowrap"
-                  >
-                    Book a demo
-                    <ArrowRight className="w-3 md:w-4 h-3 md:h-4" />
-                  </Link>
-                  */}
+                    <Link
+                      href="/contact"
+                      className="flex items-center justify-center gap-1.5 md:gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black px-3 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-colors w-fit whitespace-nowrap"
+                    >
+                      Book a demo
+                      <ArrowRight className="w-3 md:w-4 h-3 md:h-4" />
+                    </Link>
                   </div>
                 </div>
 

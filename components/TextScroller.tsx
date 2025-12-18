@@ -7,25 +7,29 @@ import { cn } from "@/lib/utils";
 interface TextScrollerProps {
   words: string[];
   interval?: number;
+  initialDelay?: number; // Added prop for the first word delay
   className?: string;
 }
 
 export default function TextScroller({
   words,
   interval = 2000,
+  initialDelay = 4000, // Default to 4 seconds for the first word
   className,
 }: TextScrollerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    // Determine delay: If index is 0 (first word), use initialDelay, else use standard interval
+    const delay = currentIndex === 0 ? initialDelay : interval;
+
+    const timer = setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % words.length);
-    }, interval);
+    }, delay);
 
-    return () => clearInterval(timer);
-  }, [words.length, interval]);
+    return () => clearTimeout(timer);
+  }, [currentIndex, interval, initialDelay, words.length]);
 
-  // CHANGED: h-[1.1em] -> h-[1.3em] (More room for tails)
   return (
     <div
       className={cn(
@@ -45,8 +49,6 @@ export default function TextScroller({
             damping: 20,
             duration: 0.5,
           }}
-          // CHANGED: items-center -> items-start (Anchors text to top so space adds to bottom)
-          // ADDED: pt-[0.1em] (Small push to align perfectly with "to 3D")
           className="col-start-1 row-start-1 flex items-start justify-center whitespace-nowrap pt-[0.1em]"
         >
           {words[currentIndex]}
