@@ -42,6 +42,17 @@ export default function RootLayout({
         <Footer />
         <Analytics />
         <Toaster />
+
+        {/* ✅ CORRECT PLACEMENT: Floating Status Badge */}
+        <div className="fixed bottom-4 right-4 z-50 flex items-center gap-2 px-4 py-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full shadow-2xl pointer-events-none">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary/90"></span>
+          </span>
+          <span className="text-xs font-medium text-white/80 uppercase tracking-wider">
+            Website in Progress
+          </span>
+        </div>
       </body>
     </html>
   );

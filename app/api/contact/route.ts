@@ -1,69 +1,69 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    console.log("📨 Processing Contact Form for:", body.email);
 
-    // Log the payload to ensure we are sending the right data
-    console.log(
-      "1. Received Payload from Form:",
-      JSON.stringify(body, null, 2)
-    );
+    // 1. Validate that secrets exist
+    if (!process.env.SMTP_PASSWORD || !process.env.SMTP_USERNAME) {
+      console.error("❌ Missing SMTP Credentials in .env.local");
+      return NextResponse.json(
+        { message: "Server misconfiguration" },
+        { status: 500 }
+      );
+    }
 
-    // Send to Backend
-    console.log("2. Sending to https://api.metashopai.com/contactus/create...");
-    const res = await fetch("https://api.metashopai.com/contactus/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // Mimic a browser request to avoid being blocked
-        "User-Agent":
-          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        Origin: "https://metashopai.com",
-        Referer: "https://metashopai.com/",
+    // 2. Configure the Transporter using YOUR variable names
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: Number(process.env.SMTP_PORT) === 465, // True for 465, False for 587
+      auth: {
+        user: process.env.SMTP_USERNAME, // Matches your key
+        pass: process.env.SMTP_PASSWORD, // Matches your key
       },
-      body: JSON.stringify(body),
     });
 
-    console.log(
-      `3. Backend responded with Status: ${res.status} ${res.statusText}`
-    );
+    // 3. Define the Email
+    const mailOptions = {
+      from: `"MetaShop AI" <${process.env.EMAIL_FROM}>`, // Matches your key
+      to: "info@metashopai.com", // Where the lead should go
+      replyTo: body.email, // Hitting "Reply" goes to the customer
+      subject: `New Contact Request: ${body.name}`,
+      text: `
+        Name: ${body.name}
+        Email: ${body.email}
+        Phone: ${body.phone || "Not provided"}
+        Message: ${body.message}
+      `,
+      html: `
+        <div style="font-family: sans-serif; padding: 20px;">
+          <h2 style="color: #333;">New Contact Submission</h2>
+          <p><strong>Name:</strong> ${body.name}</p>
+          <p><strong>Email:</strong> <a href="mailto:${body.email}">${
+        body.email
+      }</a></p>
+          <p><strong>Phone:</strong> ${body.phone || "N/A"}</p>
+          <br/>
+          <div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">
+            <strong>Message:</strong><br/>
+            ${body.message}
+          </div>
+        </div>
+      `,
+    };
 
-    // Get the raw text first (don't assume it's JSON yet)
-    const responseText = await res.text();
+    // 4. Send
+    await transporter.sendMail(mailOptions);
+    console.log("✅ Email sent successfully!");
 
-    // Attempt to parse it as JSON
-    let data;
-    try {
-      data = JSON.parse(responseText);
-      console.log("4. Successfully parsed JSON response.");
-    } catch (e) {
-      // If parsing fails, it's HTML. Log the first 500 characters to see the error message.
-      console.error("❌ CRITICAL ERROR: Backend returned HTML, not JSON.");
-      console.error("--- Raw Response Start ---");
-      console.error(responseText.slice(0, 500));
-      console.error("--- Raw Response End ---");
-
-      return NextResponse.json(
-        {
-          message: `Backend Error (${res.status}): The server returned an HTML error page instead of data.`,
-        },
-        { status: res.status || 500 }
-      );
-    }
-
-    if (!res.ok) {
-      return NextResponse.json(
-        { message: data.message || "Failed to submit to backend" },
-        { status: res.status }
-      );
-    }
-
-    return NextResponse.json(data);
+    return NextResponse.json({ success: true, message: "Email sent!" });
   } catch (error: any) {
-    console.error("Proxy Error:", error);
+    console.error("❌ SMTP Error:", error);
     return NextResponse.json(
-      { message: error.message || "Internal Server Error" },
+      { message: "Failed to send email." },
       { status: 500 }
     );
   }

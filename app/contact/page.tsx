@@ -12,7 +12,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-// Removed HoverBorderGradient import as we are replacing it
 import { ArrowRight, Phone, Mail, Loader2 } from "lucide-react";
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
@@ -32,7 +31,7 @@ const formSchema = z.object({
   companyLocation: z.string().optional(),
   needs3DFor: z.array(z.string()).min(1, "Please select at least one 3D need"),
   categoryQuantity: z.string().min(1, "This field is required"),
-  needsAPI: z.enum(["yes", "no", "not-sure"], {
+  needsAPI: z.enum(["yes", "no", "not sure"], {
     required_error: "Please select API requirement",
   }),
   additionalInfo: z.string().optional(),
@@ -75,7 +74,7 @@ export default function ContactPage() {
     "Other",
   ];
 
-  // 3. Handle Submission
+  // 3. Handle Submission (🔴 FIXED LOGIC HERE)
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
 
@@ -98,7 +97,8 @@ export default function ContactPage() {
     try {
       const response = await submitContactForm(payload);
 
-      if (response.status) {
+      // 🟢 CHANGE: We now check for 'success' because that is what our new backend returns
+      if (response.success || response.status === 200) {
         toast.success("Message sent successfully!", {
           description: "We'll get back to you within 48 hours.",
         });
@@ -109,6 +109,7 @@ export default function ContactPage() {
         });
       }
     } catch (error: any) {
+      console.error("Submission Error:", error);
       toast.error("Submission failed", {
         description:
           error.message || "Please check your connection and try again.",
@@ -405,7 +406,7 @@ export default function ContactPage() {
                       render={({ field }) => (
                         <RadioGroup
                           onValueChange={field.onChange}
-                          value={field.value}
+                          value={field.value || ""}
                           className="flex gap-6"
                         >
                           <div className="flex items-center gap-2">
@@ -428,7 +429,7 @@ export default function ContactPage() {
                           </div>
                           <div className="flex items-center gap-2">
                             <RadioGroupItem
-                              value="not-sure"
+                              value="not sure"
                               id="api-not-sure"
                             />
                             <Label
@@ -461,7 +462,7 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  {/* UPDATED SUBMIT BUTTON */}
+                  {/* Submit Button */}
                   <div className="pt-4">
                     <button
                       type="submit"

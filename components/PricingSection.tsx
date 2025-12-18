@@ -188,7 +188,7 @@ export default function PricingSection() {
 
         {/* Footer Note */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-muted-foreground w-full mx-auto">
+          <p className="text-sm md:text-base text-muted-foreground w-full mx-auto">
             All plans include enterprise-grade security and customer data
             protection. Use of the platform is subject to the terms outlined in
             our Terms of Use.

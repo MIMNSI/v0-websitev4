@@ -5,28 +5,39 @@ interface ScrollTextProps {
 }
 
 export const ScrollText = ({ scrollProgress }: ScrollTextProps) => {
+  // 1. Determine if we should render at all (Stop rendering after 60% scroll)
   const showIntro = scrollProgress < 0.6;
-  const entrySlide = Math.max(0, 1 - scrollProgress / 0.1);
+
+  if (!showIntro) return null;
+
+  // 2. Squeeze Animation (Starts after 10% scroll)
+  // This calculates how much the text should compress into the center
   const squeezeProgress = Math.min(
     1,
     Math.max(0, (scrollProgress - 0.1) / 0.1)
   );
 
-  // Tighter squeeze distance
-  const squeezeDistance = 100;
-
-  const justX = -150 * entrySlide + squeezeDistance * squeezeProgress;
-  const imagesX = 150 * entrySlide - squeezeDistance * squeezeProgress;
-
+  // 3. Flip Animation (Starts after 20% scroll)
   const flipProgress = Math.min(1, Math.max(0, (scrollProgress - 0.2) / 0.05));
+
+  // --- POSITIONS ---
+  const squeezeDistance = 100; // How far they move towards the center
+
+  // ✅ FIXED: Removed "entrySlide".
+  // Now, at scroll 0, position is 0 (Centered).
+  // As we scroll, they move towards the center (Squeeze).
+  const justX = squeezeDistance * squeezeProgress; // Moves Right
+  const imagesX = -squeezeDistance * squeezeProgress; // Moves Left
+
   const cardRotateY = flipProgress * 90;
 
-  const introOpacity = Math.min(1, scrollProgress * 10);
-  const textOpacity = introOpacity * (1 - squeezeProgress);
-  const cardOpacity =
-    introOpacity * (1 - Math.max(0, (flipProgress - 0.8) * 5));
+  // --- OPACITIES ---
 
-  if (!showIntro) return null;
+  // ✅ FIXED: Text starts fully visible (1), and fades out as we squeeze
+  const textOpacity = 1 - squeezeProgress;
+
+  // ✅ FIXED: Card starts fully visible (1), and fades out only at the very end of the flip
+  const cardOpacity = 1 - Math.max(0, (flipProgress - 0.8) * 5);
 
   return (
     <div

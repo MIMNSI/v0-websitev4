@@ -4,18 +4,18 @@ import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ChevronDown, MousePointer2, ChevronLeft, Loader2 } from "lucide-react"; // Added Loader2
-import { useForm } from "react-hook-form"; // Import Hook Form
-import { zodResolver } from "@hookform/resolvers/zod"; // Import Resolver
-import * as z from "zod"; // Import Zod
-import { toast } from "sonner"; // Import Sonner for notifications
+import { ChevronDown, MousePointer2, ChevronLeft, Loader2 } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { toast } from "sonner";
 
 // Import custom components
 import { ProductCard } from "@/components/image-to-3d/ProductCard";
 import ParticleExplosion from "@/components/image-to-3d/ParticleExplosion";
 import { Model3D } from "@/components/image-to-3d/Model3D";
 import { ScrollText } from "@/components/image-to-3d/ScrollText";
-import { submitWaitlistForm } from "@/lib/api"; // Import API Bridge
+import { submitWaitlistForm } from "@/lib/api";
 
 // Define Asset Paths
 const chairFront = "/images/front.jpg";
@@ -107,17 +107,17 @@ export default function ImageTo3DPage() {
       const payload = {
         email: data.email,
         phone: data.phone,
-        source: "Image-to-3D Page", // Tag source for analytics
+        source: "Image-to-3D Page",
       };
 
       const response = await submitWaitlistForm(payload);
 
-      if (response.status) {
+      if (response.success || response.status === 200) {
         toast.success("You're on the list!", {
           description: "We'll notify you when early access opens.",
         });
         setIsJoined(true);
-        reset(); // Clear form
+        reset();
       } else {
         toast.error("Something went wrong", {
           description: response.message || "Please try again later.",
@@ -254,13 +254,14 @@ export default function ImageTo3DPage() {
             transition: "opacity 0.5s",
           }}
         >
-          {isJoined ? (
-            <div className="bg-[#2dffa7]/10 border border-[#2dffa7]/30 text-[#2dffa7] px-8 py-4 rounded-full text-xl font-medium backdrop-blur-md animate-in fade-in zoom-in duration-500">
-              You&apos;re on the list! 🚀
-            </div>
-          ) : (
-            <div className="flex flex-col xl:flex-row items-center gap-6 w-full max-w-5xl justify-center">
-              {/* Form Container */}
+          {/* ✅ FIXED: The container wraps BOTH the form/success AND the link */}
+          <div className="flex flex-col xl:flex-row items-center gap-6 w-full max-w-5xl justify-center">
+            {/* Conditional Block: Form OR Success Message */}
+            {isJoined ? (
+              <div className="bg-[#2dffa7]/10 border border-[#2dffa7]/30 text-[#2dffa7] px-8 py-4 rounded-full text-xl font-medium backdrop-blur-md animate-in fade-in zoom-in duration-500">
+                You&apos;re on the list! 🚀
+              </div>
+            ) : (
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-full md:w-auto flex flex-col md:flex-row items-stretch md:items-center p-2 rounded-[2rem] bg-[#1A1A1A]/80 backdrop-blur-md border border-white/10 shadow-2xl shadow-emerald-500/10 gap-2 md:gap-0"
@@ -311,17 +312,17 @@ export default function ImageTo3DPage() {
                   )}
                 </Button>
               </form>
+            )}
 
-              {/* Back Link */}
-              <Link
-                href="/"
-                className="group flex items-center gap-2 text-white/70 hover:text-white transition-colors font-medium text-sm md:text-base px-4 py-2"
-              >
-                <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                Back to Homepage
-              </Link>
-            </div>
-          )}
+            {/* ✅ FIXED: Link is now OUTSIDE the conditional check, so it's always visible */}
+            <Link
+              href="/"
+              className="group flex items-center gap-2 text-white/70 hover:text-white transition-colors font-medium text-sm md:text-base px-4 py-2"
+            >
+              <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              Back to Homepage
+            </Link>
+          </div>
         </div>
       </div>
     </div>
