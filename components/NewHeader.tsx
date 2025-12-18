@@ -59,29 +59,31 @@ export default function NewHeader() {
           >
             FAQ
           </Link>
-          <Link
-            href="/contact"
-            className="text-sm text-white/90 hover:text-white transition-colors"
-          >
+          {/* HIDDEN: Contact Us Link
+          <Link href="/contact" className="text-sm text-white/90 hover:text-white transition-colors">
             Contact Us
           </Link>
+          */}
         </nav>
 
         {/* Action Group */}
         <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
           {/* Logic: "Call us" link visible on Mobile/Tablet (lg:hidden) */}
+          {/* HIDDEN: Call us link
           <Link
             href="/contact"
             className="lg:hidden text-xs md:text-sm text-white/90 hover:text-white transition-colors whitespace-nowrap"
           >
             Call us
           </Link>
+          */}
 
           {/* Logic: Full number visible ONLY on Desktop (hidden lg:inline) */}
           <span className="hidden lg:inline text-sm text-white/70 whitespace-nowrap">
             Call: +91 9130971867
           </span>
 
+          {/* HIDDEN: Book a Demo Button
           <Link
             href="/contact"
             className="flex items-center gap-1.5 md:gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black px-3 md:px-4 lg:px-6 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-colors whitespace-nowrap"
@@ -89,6 +91,7 @@ export default function NewHeader() {
             Book a Demo
             <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
           </Link>
+          */}
 
           {/* Mobile Menu Button */}
           <button
@@ -130,12 +133,11 @@ export default function NewHeader() {
             >
               FAQ
             </Link>
-            <Link
-              href="/contact"
-              className="text-sm text-white/90 hover:text-white transition-colors py-2"
-            >
+            {/* HIDDEN: Mobile Contact Us
+            <Link href="/contact" className="text-sm text-white/90 hover:text-white transition-colors py-2">
               Contact Us
             </Link>
+            */}
 
             {/* Expanded Bottom Section: Phone + Big CTA */}
             <div className="border-t border-white/10 pt-4 mt-2 flex flex-col gap-3">
@@ -145,13 +147,13 @@ export default function NewHeader() {
               >
                 Call: +91 9130971867
               </Link>
-              <Link
+              {/*<Link
                 href="/contact"
                 className="flex items-center justify-center gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black px-6 py-2.5 rounded-full text-sm font-medium transition-colors"
               >
                 Book a Demo
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </Link>*/}
             </div>
           </nav>
         </div>

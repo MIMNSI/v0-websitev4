@@ -80,15 +80,15 @@ export default function Hero() {
                       Video to 3D
                     </h3>
 
-                    <Link
-                      href="/contact"
-                      className="flex items-center justify-center gap-1.5 md:gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black font-medium transition-colors whitespace-nowrap
-                      w-[120px] h-[28px] text-[14px]
-                      md:w-[148px] md:h-[40px] md:text-[16px] rounded-full"
-                    >
-                      Book a demo
-                      <ArrowRight className="w-3 md:w-4 h-3 md:h-4" />
-                    </Link>
+                    {/* HIDDEN: Book a Demo Button 
+                  <Link
+                    href="/contact"
+                    className="flex items-center justify-center gap-1.5 md:gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black px-3 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-colors w-fit whitespace-nowrap"
+                  >
+                    Book a demo
+                    <ArrowRight className="w-3 md:w-4 h-3 md:h-4" />
+                  </Link>
+                  */}
                   </div>
                 </div>
 
