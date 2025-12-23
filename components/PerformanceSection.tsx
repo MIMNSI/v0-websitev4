@@ -133,7 +133,7 @@ export default function PerformanceSection() {
 
                 <div className="w-full flex-1 rounded-xl overflow-hidden bg-black/20 relative min-h-[250px]">
                   <img
-                    src="/images/alldevices.png"
+                    src="/images/alldevices.jpg"
                     alt="Performance across devices"
                     className="absolute inset-0 w-full h-full object-cover"
                   />

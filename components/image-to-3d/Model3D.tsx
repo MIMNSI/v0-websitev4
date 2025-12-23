@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+
 interface Model3DProps {
   opacity: number;
 }
@@ -48,6 +49,7 @@ export const Model3D = ({ opacity }: Model3DProps) => {
           alt="3D Model"
           shadow-intensity="1"
           camera-controls // Enables drag-to-rotate interaction
+          disable-zoom // <--- ADDED: Disables scroll-to-zoom
           auto-rotate // Enables gentle automatic rotation
           rotation-per-second="10deg"
           style={{

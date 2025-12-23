@@ -74,30 +74,28 @@ export default function ContactPage() {
     "Other",
   ];
 
-  // 3. Handle Submission (🔴 FIXED LOGIC HERE)
+  // 3. Handle Submission (🔴 FIXED DATA STRUCTURE HERE)
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
 
+    // We create a "FLAT" object so the email reads it perfectly.
+    // No nested objects like { company: { name: ... } }
     const payload = {
-      name: data.fullName,
-      email: data.email,
-      phone: data.phone,
-      ...((data.companyName || data.companyLocation) && {
-        company: {
-          ...(data.companyName ? { name: data.companyName } : {}),
-          ...(data.companyLocation ? { location: data.companyLocation } : {}),
-        },
-      }),
-      need3DFor: data.needs3DFor,
-      categoryAndQuantity: data.categoryQuantity,
-      needAPI: data.needsAPI,
-      ...(data.additionalInfo ? { moreRequirement: data.additionalInfo } : {}),
+      Name: data.fullName,
+      Email: data.email,
+      Phone: data.phone,
+      "Company Name": data.companyName || "Not Provided",
+      "Company Location": data.companyLocation || "Not Provided",
+      // .join turns ["Car", "House"] into "Car, House"
+      "Need 3D For": data.needs3DFor.join(", "),
+      "Category And Quantity": data.categoryQuantity,
+      "Need API": data.needsAPI,
+      "More Requirement": data.additionalInfo || "None",
     };
 
     try {
       const response = await submitContactForm(payload);
 
-      // 🟢 CHANGE: We now check for 'success' because that is what our new backend returns
       if (response.success || response.status === 200) {
         toast.success("Message sent successfully!", {
           description: "We'll get back to you within 48 hours.",

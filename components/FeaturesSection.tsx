@@ -1,7 +1,6 @@
 "use client";
 
 import { Monitor } from "lucide-react";
-import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 
 // Updated Data Structure
 const features = [
@@ -16,14 +15,15 @@ const features = [
     title: "Generate 3D",
     description:
       "Photorealistic 3D powered by Gaussian Splats & NeRFs. Fully automated. No manual touch-ups.",
-    type: "video",
-    source: "/videos/generate.mp4",
+    type: "3d-model", // KEEPING THIS AS 3D VIEWER
+    source:
+      "https://metashopairealestate.s3.us-east-1.amazonaws.com/UV_FST+2/UV_Model_Only.html",
   },
   {
     title: "Customise & Embed",
     description:
       "We brand and tailor your 3D models with CTAs, hotspots, and more. Simply embed or share in one click.",
-    type: "image",
+    type: "image", // RESTORED TO IMAGE
     source: "/images/customise.png",
   },
 ];
@@ -32,9 +32,8 @@ export default function FeaturesSection() {
   return (
     <section className="relative py-[40px] md:py-[80px] lg:py-[90px] bg-background">
       <div className="w-[95%] max-w-7xl mx-auto">
-        {/* Overline with web icon - FIXED: Added transform classes to make effects visible */}
+        {/* Overline with web icon */}
         <div className="flex justify-center mb-6">
-          {/* Added: transition-all duration-300 -translate-y-0.5 */}
           <div className="relative inline-flex items-center gap-2.5 rounded-full bg-black border border-white/10 shadow-[0_2px_12px_rgba(34,197,94,0.08)] overflow-hidden px-[18px] py-3 md:px-[26px] md:py-4 lg:px-[34px] lg:py-[22px] transition-all duration-300 -translate-y-0.5">
             {/* --- Background Effect 1: Radial Dots --- */}
             <div className="absolute inset-0 opacity-100 pointer-events-none">
@@ -44,7 +43,7 @@ export default function FeaturesSection() {
             {/* --- Background Effect 2: Diagonal Slant/Shine --- */}
             <div className="absolute inset-0 -z-10 rounded-full p-px bg-gradient-to-br from-transparent via-white/15 to-transparent opacity-100 pointer-events-none" />
 
-            {/* Content (relative z-10 ensures it sits on top of effects) */}
+            {/* Content */}
             <div className="relative z-10 flex items-center gap-2.5">
               <Monitor className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8 text-primary" />
               <span className="text-sm md:text-base lg:text-[20px] font-medium text-foreground">
@@ -61,13 +60,11 @@ export default function FeaturesSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 lg:gap-6">
           {features.map((feature, index) => (
-            <CardContainer key={index} className="w-full">
-              <CardBody className="relative group/card bg-[#1A1A1A] rounded-2xl p-6 sm:p-4 lg:p-6 border border-border/50 hover:shadow-2xl hover:shadow-emerald-500/[0.1] transition-shadow duration-300 h-auto">
-                <CardItem
-                  translateZ="80"
-                  as="div"
-                  className="mb-4 sm:mb-3 lg:mb-4"
-                >
+            <div key={index} className="w-full">
+              {/* UPDATED: Changed h-auto to h-full to make cards equal height */}
+              <div className="relative group/card bg-[#1A1A1A] rounded-2xl p-6 sm:p-4 lg:p-6 border border-border/50 hover:shadow-2xl hover:shadow-emerald-500/[0.1] transition-shadow duration-300 h-full flex flex-col">
+                {/* Number */}
+                <div className="mb-4 sm:mb-3 lg:mb-4">
                   <div
                     className="text-7xl sm:text-5xl lg:text-7xl font-bold text-primary/20"
                     style={{
@@ -83,28 +80,21 @@ export default function FeaturesSection() {
                   >
                     {index + 1}
                   </div>
-                </CardItem>
+                </div>
 
                 {/* Title */}
-                <CardItem
-                  translateZ="50"
-                  as="h3"
-                  className="text-xl sm:text-lg lg:text-xl font-bold text-foreground mb-3 sm:mb-2 lg:mb-3"
-                >
+                <h3 className="text-xl sm:text-lg lg:text-xl font-bold text-foreground mb-3 sm:mb-2 lg:mb-3">
                   {feature.title}
-                </CardItem>
+                </h3>
 
                 {/* Description */}
-                <CardItem
-                  translateZ="60"
-                  as="p"
-                  className="text-sm sm:text-xs lg:text-sm text-muted-foreground leading-relaxed mb-6 sm:mb-4 lg:mb-6"
-                >
+                <p className="text-sm sm:text-xs lg:text-sm text-muted-foreground leading-relaxed mb-6 sm:mb-4 lg:mb-6">
                   {feature.description}
-                </CardItem>
+                </p>
 
-                {/* Media (Video or Image) */}
-                <CardItem translateZ="100" className="w-full">
+                {/* Media (Video, Image, or 3D Model) */}
+                {/* mt-auto pushes this to the bottom of the card, aligning all media containers */}
+                <div className="w-full mt-auto">
                   <div className="w-full aspect-[16/9] overflow-hidden rounded-xl bg-black/20 relative">
                     {feature.type === "video" ? (
                       <video
@@ -115,17 +105,26 @@ export default function FeaturesSection() {
                         playsInline
                         className="w-full h-full object-cover"
                       />
+                    ) : feature.type === "3d-model" ? (
+                      <iframe
+                        src={feature.source}
+                        className="w-full h-full border-none"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                        title={feature.title}
+                      />
                     ) : (
                       <img
                         src={feature.source || "/placeholder.svg"}
                         alt={feature.title}
-                        className="w-full h-full object-cover group-hover/card:shadow-xl transition-shadow duration-300"
+                        className="w-full h-full object-cover"
                       />
                     )}
                   </div>
-                </CardItem>
-              </CardBody>
-            </CardContainer>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -26,20 +26,15 @@ export default function Hero() {
         <div className="max-w-[1400px] mx-auto w-full">
           <div className="flex flex-col items-center justify-center">
             <div className="w-full max-w-4xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-0 rounded-full border border-white/20 bg-[#1a1a1a]/60 backdrop-blur-sm py-1 md:py-1.5 mb-8 md:mb-10 lg:py-1.5 px-px pr-0.5 mx-auto">
-                <div className="rounded-full bg-white px-2.5 py-1 ml-0.5 md:ml-[6px] md:px-3 lg:px-1.5 lg:py-0.5">
-                  <span className="text-xs md:text-sm lg:text-[14px] font-medium text-black whitespace-nowrap">
-                    100% AI-driven
-                  </span>
-                </div>
-                <span className="text-xs md:text-sm lg:text-[14px] text-white/90 px-2.5 md:px-3 lg:px-[10px] whitespace-nowrap">
-                  Zero manual intervention
+              {/* --- UPDATED BADGE --- */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#1a1a1a]/60 backdrop-blur-sm py-1.5 px-4 mb-8 md:mb-10 mx-auto">
+                <span className="text-xs md:text-sm lg:text-[14px] font-medium text-white/90 whitespace-nowrap">
+                  100% Automated - No manual intervention
                 </span>
               </div>
 
-              {/* Heading */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-light mb-8 md:mb-12 leading-tight font-sans text-center">
+              {/* Heading - UPDATED FONT SIZES HERE */}
+              <h1 className="text-[42px] md:text-[58px] lg:text-[68px] xl:text-[72px] font-normal mb-8 md:mb-12 leading-tight font-sans text-center">
                 {/* First Line: Text Scroller */}
                 <div className="relative h-[1.3em] w-full overflow-hidden flex justify-center items-start mb-2 md:mb-4">
                   <span className="text-white">
@@ -70,21 +65,30 @@ export default function Hero() {
               {/* Cards Grid */}
               <div className="grid grid-cols-2 gap-3 md:gap-6 mb-8 md:mb-12 md:max-w-[86.25%] mx-auto">
                 {/* --- Video to 3D Card --- */}
-                <div className="group relative rounded-xl overflow-hidden border border-white/10 bg-black shadow-[0_2px_12px_rgba(34,197,94,0.08)] transition-all duration-300 -translate-y-0.5">
+                {/* Redirects to #production section */}
+                <div className="group relative rounded-xl overflow-hidden border border-white/10 bg-black shadow-[0_2px_12px_rgba(34,197,94,0.08)] transition-all duration-300 -translate-y-0.5 cursor-pointer hover:border-[#2dffa7]/30">
+                  {/* Background Link that covers the whole card */}
+                  <Link
+                    href="/#production"
+                    className="absolute inset-0 z-0"
+                    aria-label="Go to Production Section"
+                  />
+
                   <div className="absolute inset-0 opacity-100 pointer-events-none">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.04)_1px,transparent_1px)] bg-[length:4px_4px]" />
                   </div>
                   <div className="absolute inset-0 -z-10 rounded-xl p-px bg-gradient-to-br from-transparent via-white/15 to-transparent opacity-100 pointer-events-none" />
 
-                  {/* Content Group */}
-                  <div className="relative z-10 flex flex-col items-center w-full px-[10px] md:px-[20px] py-[20px] lg:py-[30px] gap-[30px] lg:gap-[46px]">
+                  {/* Content Group - pointer-events-none allows clicks to pass through to the card link */}
+                  <div className="relative z-10 flex flex-col items-center w-full px-[10px] md:px-[20px] py-[20px] lg:py-[30px] gap-[30px] lg:gap-[46px] pointer-events-none">
                     <h3 className="text-[18px] md:text-[24px] font-medium text-white text-center whitespace-nowrap">
                       Video to 3D
                     </h3>
 
+                    {/* Button - pointer-events-auto re-enables clicking specifically for this button */}
                     <Link
                       href="/contact"
-                      className="flex items-center justify-center gap-1.5 md:gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black px-3 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-colors w-fit whitespace-nowrap"
+                      className="pointer-events-auto flex items-center justify-center gap-1.5 md:gap-2 bg-[#2dffa7] hover:bg-[#2dffa7]/90 text-black px-3 md:px-5 py-2 md:py-2.5 rounded-full text-xs md:text-sm font-medium transition-colors w-fit whitespace-nowrap"
                     >
                       Book a demo
                       <ArrowRight className="w-3 md:w-4 h-3 md:h-4" />
@@ -93,7 +97,11 @@ export default function Hero() {
                 </div>
 
                 {/* --- Image to 3D Card --- */}
-                <div className="group relative rounded-xl overflow-hidden border border-white/10 bg-black shadow-[0_2px_12px_rgba(34,197,94,0.08)] transition-all duration-300 -translate-y-0.5">
+                {/* Redirects to Image to 3D page */}
+                <Link
+                  href="/image-to-3d"
+                  className="group relative rounded-xl overflow-hidden border border-white/10 bg-black shadow-[0_2px_12px_rgba(34,197,94,0.08)] transition-all duration-300 -translate-y-0.5 hover:border-[#2dffa7]/30 block"
+                >
                   <div className="absolute inset-0 opacity-100 pointer-events-none">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.04)_1px,transparent_1px)] bg-[length:4px_4px]" />
                   </div>
@@ -105,16 +113,17 @@ export default function Hero() {
                       Image to 3D
                     </h3>
 
-                    <button
-                      className="flex items-center justify-center gap-1.5 md:gap-2 border border-[#2dffa7] text-[#2dffa7] hover:bg-[#2dffa7]/10 font-medium transition-colors whitespace-nowrap
+                    {/* Visually a button, but technically just a div since it's inside a Link */}
+                    <div
+                      className="flex items-center justify-center gap-1.5 md:gap-2 border border-[#2dffa7] text-[#2dffa7] group-hover:bg-[#2dffa7]/10 font-medium transition-colors whitespace-nowrap
                       w-[120px] h-[28px] text-[14px]
                       md:w-[148px] md:h-[40px] md:text-[16px] rounded-full"
                     >
                       Join waitlist
                       <ArrowRight className="w-3 md:w-4 h-3 md:h-4" />
-                    </button>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
 
               {/* Trusted By */}

@@ -16,6 +16,7 @@ import ParticleExplosion from "@/components/image-to-3d/ParticleExplosion";
 import { Model3D } from "@/components/image-to-3d/Model3D";
 import { ScrollText } from "@/components/image-to-3d/ScrollText";
 import { submitWaitlistForm } from "@/lib/api";
+import NewHeader from "@/components/NewHeader";
 
 // Define Asset Paths
 const chairFront = "/images/front.jpg";
@@ -32,7 +33,6 @@ const products = [
   { image: chairLeft, label: "Left" },
 ];
 
-// 1. Define Validation Schema
 const waitlistSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z
@@ -47,14 +47,13 @@ type WaitlistData = z.infer<typeof waitlistSchema>;
 export default function ImageTo3DPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [isJoined, setIsJoined] = useState(false); // Success state
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isJoined, setIsJoined] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const scrollRef = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [cardStage, setCardStage] = useState<any>("hidden");
 
-  // 2. Setup React Hook Form
   const {
     register,
     handleSubmit,
@@ -71,8 +70,12 @@ export default function ImageTo3DPage() {
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
+
       const scrollTop = window.scrollY;
       const height = containerRef.current.scrollHeight - window.innerHeight;
+
+      if (height <= 0) return;
+
       const progress = Math.min(Math.max(scrollTop / height, 0), 1);
 
       scrollRef.current = progress;
@@ -87,6 +90,7 @@ export default function ImageTo3DPage() {
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -99,15 +103,15 @@ export default function ImageTo3DPage() {
     });
   };
 
-  // 3. Handle Form Submission
   const onSubmit = async (data: WaitlistData) => {
     setIsLoading(true);
 
     try {
+      // 🟢 Capitalized Keys for Professional Email Formatting
       const payload = {
-        email: data.email,
-        phone: data.phone,
-        source: "Image-to-3D Page",
+        Email: data.email,
+        Phone: data.phone,
+        Source: "Image-to-3D Page",
       };
 
       const response = await submitWaitlistForm(payload);
@@ -146,6 +150,8 @@ export default function ImageTo3DPage() {
         }
       `}</style>
 
+      <NewHeader />
+
       <div className="fixed inset-0 overflow-hidden bg-gradient-to-b from-black to-[#050a05]">
         {/* Background Grid */}
         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
@@ -175,7 +181,7 @@ export default function ImageTo3DPage() {
           }}
         >
           <div className="text-white/50 flex flex-col items-center gap-2 animate-bounce">
-            <span className="text-xs uppercase tracking-widest">
+            <span className="text-xs uppercase tracking-widest font-sans">
               Scroll to Explore
             </span>
             <ChevronDown className="w-6 h-6" />
@@ -213,10 +219,12 @@ export default function ImageTo3DPage() {
             opacity: Math.min(1, Math.max(0, (scrollProgress - 0.92) / 0.05)),
           }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4 drop-shadow-2xl text-center">
+          {/* UPDATED: Added font-display for Sora font */}
+          <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight mb-4 drop-shadow-2xl text-center font-display">
             Real Life <span className="text-[#2dffa7] inline-block">To 3D</span>
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground tracking-[0.4em] uppercase font-light text-center">
+          {/* UPDATED: Removed tracking-[0.4em] and added font-sans for Geist font */}
+          <p className="text-lg md:text-xl text-muted-foreground uppercase font-light text-center font-sans">
             100% Automated With AI
           </p>
         </div>
@@ -227,9 +235,8 @@ export default function ImageTo3DPage() {
           style={{
             pointerEvents: scrollProgress > 0.92 ? "auto" : "none",
             opacity: modelScale,
-            transform: `scale(${0.1 + modelScale * 0.9})`,
-            transition:
-              "opacity 0.2s linear, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            transform: `scale(1)`, // Kept scale at 1 to prevent zoom effect
+            transition: "opacity 0.2s linear",
           }}
           onMouseDown={() => setHasInteracted(true)}
           onTouchStart={() => setHasInteracted(true)}
@@ -237,7 +244,7 @@ export default function ImageTo3DPage() {
           <div className="w-full h-[50vh] mt-20 relative group">
             <Model3D opacity={1} />
             {!hasInteracted && scrollProgress > 0.95 && (
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none bg-black/60 text-white px-4 py-2 rounded-full flex items-center gap-2 backdrop-blur-sm animate-pulse border border-white/10">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none bg-black/60 text-white px-4 py-2 rounded-full flex items-center gap-2 backdrop-blur-sm animate-pulse border border-white/10 font-sans">
                 <MousePointer2 className="w-4 h-4" />
                 <span className="text-sm font-medium">Drag to Rotate</span>
               </div>
@@ -254,8 +261,7 @@ export default function ImageTo3DPage() {
             transition: "opacity 0.5s",
           }}
         >
-          {/* ✅ FIXED: The container wraps BOTH the form/success AND the link */}
-          <div className="flex flex-col xl:flex-row items-center gap-6 w-full max-w-5xl justify-center">
+          <div className="flex flex-col xl:flex-row items-center gap-6 w-full max-w-5xl justify-center font-sans">
             {/* Conditional Block: Form OR Success Message */}
             {isJoined ? (
               <div className="bg-[#2dffa7]/10 border border-[#2dffa7]/30 text-[#2dffa7] px-8 py-4 rounded-full text-xl font-medium backdrop-blur-md animate-in fade-in zoom-in duration-500">
@@ -314,7 +320,6 @@ export default function ImageTo3DPage() {
               </form>
             )}
 
-            {/* ✅ FIXED: Link is now OUTSIDE the conditional check, so it's always visible */}
             <Link
               href="/"
               className="group flex items-center gap-2 text-white/70 hover:text-white transition-colors font-medium text-sm md:text-base px-4 py-2"

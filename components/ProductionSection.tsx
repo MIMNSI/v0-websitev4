@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import { PlayCircle, X, Loader2 } from "lucide-react"; // Import necessary icons
+import { PlayCircle, X, Loader2 } from "lucide-react";
 
 // -- Data --
 const industries = [
@@ -27,7 +27,7 @@ const allClients = [
     industryId: "travel",
     logo: "/logos/awayddings-logo.webp",
     modelUrl:
-      "https://metashopai.s3.ap-south-1.amazonaws.com/uiUpdater-main/Dallas/Exterior/Dallas_Exterior.html",
+      "https://metashopairealestate.s3.us-east-1.amazonaws.com/uiUpdater/Dallas/Exterior/Dallas_Exterior.html",
   },
   {
     id: "ultraviolette",
@@ -35,7 +35,7 @@ const allClients = [
     industryId: "commercial",
     logo: "/logos/ultraviolette.svg",
     modelUrl:
-      "https://metashopai.s3.ap-south-1.amazonaws.com/UV_FST/UV_Manual_3Points.html",
+      "https://metashopairealestate.s3.us-east-1.amazonaws.com/UV_FST+2/UV_Manual_3Points.html",
   },
   {
     id: "itallica",
@@ -55,10 +55,8 @@ const allClients = [
   },
 ];
 
-// Define the threshold for desktop (e.g., tailwind's 'md' breakpoint is 768px)
 const DESKTOP_BREAKPOINT = 768;
 
-// --- 3D Viewer Modal Component ---
 interface ViewerModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -75,7 +73,6 @@ const ViewerModal: React.FC<ViewerModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    // Fixed, Fullscreen Overlay
     <motion.div
       className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex flex-col p-2 sm:p-4"
       initial={{ opacity: 0 }}
@@ -83,22 +80,17 @@ const ViewerModal: React.FC<ViewerModalProps> = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Modal Content */}
       <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-[#000000]">
-        {/* Iframe (Loads only when modal is open) */}
         <iframe
           src={url}
           className="w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
-
-        {/* Top Bar for Context */}
         <div className="absolute top-0 left-0 right-0 h-12 bg-black/50 border-b border-white/10 flex items-center px-4 justify-between">
           <p className="text-sm text-white/70 font-medium">
             Live Demo: {clientName}
           </p>
-          {/* Close Button */}
           <button
             onClick={onClose}
             className="text-white/70 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
@@ -112,27 +104,20 @@ const ViewerModal: React.FC<ViewerModalProps> = ({
   );
 };
 
-// --- Main Component ---
 export default function ProductionSection() {
   const [activeIndustry, setActiveIndustry] = useState(industries[0].id);
   const [activeClientId, setActiveClientId] = useState(allClients[0].id);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // NEW STATE: To track if the device is large enough for direct load
   const [isDesktop, setIsDesktop] = useState(true);
-  const [isReady, setIsReady] = useState(false); // Used to prevent flashing on first load
+  const [isReady, setIsReady] = useState(false);
 
-  // --- Effect to determine device size ---
   useEffect(() => {
-    // Check size once on mount
     const handleResize = () => {
-      // Set to false if window width is less than the desktop breakpoint (e.g., 768px)
       setIsDesktop(window.innerWidth >= DESKTOP_BREAKPOINT);
       setIsReady(true);
     };
 
-    handleResize(); // Initial check
-
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -171,7 +156,6 @@ export default function ProductionSection() {
   };
 
   if (!activeClient || !isReady) {
-    // Render a simple loading/skeleton state until the device check is complete
     return (
       <section className="flex justify-center items-center min-h-screen bg-black">
         <Loader2 className="w-8 h-8 text-primary animate-spin" />
@@ -179,9 +163,7 @@ export default function ProductionSection() {
     );
   }
 
-  // --- Conditional Viewer Content ---
   const ViewerContent = isDesktop ? (
-    // 1. DESKTOP VIEW: Direct Iframe Load
     <motion.div
       key={activeClient.modelUrl}
       initial={{ opacity: 0 }}
@@ -197,7 +179,6 @@ export default function ProductionSection() {
       />
     </motion.div>
   ) : (
-    // 2. MOBILE/TABLET VIEW: Interactive Card/Button (for Modal)
     <div className="w-full h-full pt-10 md:pt-12 flex items-center justify-center bg-black/50">
       <div className="flex flex-col items-center justify-center text-center p-8">
         <img
@@ -219,10 +200,12 @@ export default function ProductionSection() {
     </div>
   );
 
-  // --- Main Render ---
   return (
-    <section className="relative w-full min-h-screen bg-background flex flex-col justify-center py-8 md:py-12 lg:py-16 overflow-hidden">
-      {/* --- 3D VIEWER MODAL (Only needed for non-desktop) --- */}
+    // UPDATED: Added id="production" here so we can scroll to it from Hero
+    <section
+      id="production"
+      className="relative w-full min-h-screen bg-background flex flex-col justify-center py-8 md:py-12 lg:py-16 overflow-hidden"
+    >
       {!isDesktop && (
         <ViewerModal
           isOpen={isModalOpen}
@@ -232,23 +215,14 @@ export default function ProductionSection() {
         />
       )}
 
-      {/* --- TOP FADE FROM HERO --- */}
       <div className="absolute top-0 left-0 w-full h-32 md:h-48 bg-gradient-to-b from-black to-transparent z-20 pointer-events-none" />
 
-      {/* Page Container */}
       <div className="w-full max-w-[1400px] mx-auto relative z-30 flex flex-col items-center px-4 md:px-6">
-        {/* --- TITLE --- */}
         <h2 className="md:text-5xl lg:text-6xl text-center mb-6 md:mb-8 text-balance text-3xl font-display font-medium text-white">
           Production-ready 3D in 1 Day
         </h2>
 
-        {/* 1. Industry Filters (Tabs) */}
-        {/* ... (Keep this section as is) ... */}
-        <div
-          className="flex overflow-x-auto scrollbar-hide snap-x gap-6 md:gap-10 
-                        w-[calc(100%+32px)] -mx-4 pl-4 pr-4 justify-start 
-                        md:w-full md:mx-0 md:px-0 md:justify-center md:overflow-visible"
-        >
+        <div className="flex overflow-x-auto scrollbar-hide snap-x gap-6 md:gap-10 w-[calc(100%+32px)] -mx-4 pl-4 pr-4 justify-start md:w-full md:mx-0 md:px-0 md:justify-center md:overflow-visible">
           {industries.map((industry) => {
             const isActive = activeIndustry === industry.id;
             return (
@@ -277,16 +251,9 @@ export default function ProductionSection() {
           })}
         </div>
 
-        {/* Standalone Divider Line */}
         <div className="w-full max-w-6xl h-px bg-white/10 mb-8" />
 
-        {/* 2. Client Logos (Selection Row) */}
-        {/* ... (Keep this section as is) ... */}
-        <div
-          className="flex overflow-x-auto scrollbar-hide snap-x mb-8 py-4 gap-3 md:gap-4 max-w-6xl
-                        w-[calc(100%+32px)] -mx-4 pl-4 pr-4 justify-start 
-                        md:w-full md:mx-0 md:px-0 md:justify-between md:overflow-visible"
-        >
+        <div className="flex overflow-x-auto scrollbar-hide snap-x mb-8 py-4 gap-3 md:gap-4 max-w-6xl w-[calc(100%+32px)] -mx-4 pl-4 pr-4 justify-start md:w-full md:mx-0 md:px-0 md:justify-between md:overflow-visible">
           {allClients.map((client) => {
             const isActive = activeClientId === client.id;
             const isRelevant = client.industryId === activeIndustry;
@@ -314,8 +281,6 @@ export default function ProductionSection() {
                   alt={client.name}
                   className={`
                     w-auto object-contain transition-all duration-300
-                    
-                    ${/* SIZE LOGIC: 'Big List' gets larger height */ ""}
                     ${
                       client.id === "lnt" ||
                       client.id === "kesari" ||
@@ -324,8 +289,6 @@ export default function ProductionSection() {
                         ? "h-8 md:h-10 scale-110"
                         : "h-5 md:h-6"
                     }
-
-                    ${/* COLOR LOGIC: Force white */ ""}
                     ${
                       client.id === "lnt" ||
                       client.id === "kesari" ||
@@ -344,10 +307,8 @@ export default function ProductionSection() {
           })}
         </div>
 
-        {/* 3. The Viewer Container (Now uses the conditional ViewerContent) */}
         <motion.div layout className="w-full max-w-6xl relative">
           <div className="relative w-full h-[300px] md:h-[500px] rounded-[24px] overflow-hidden border border-border/40 bg-card/20 shadow-2xl">
-            {/* Top Bar (Keep for styling consistency) */}
             <div className="absolute top-0 left-0 right-0 h-10 md:h-12 bg-background/80 backdrop-blur-md border-b border-white/5 flex items-center px-4 justify-between z-20">
               <div className="flex gap-2">
                 <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-red-500/20 border border-red-500/50" />
@@ -359,8 +320,6 @@ export default function ProductionSection() {
               </div>
               <div className="w-10" />
             </div>
-
-            {/* CONDITIONAL CONTENT: Desktop gets the iframe, Mobile gets the button */}
             {ViewerContent}
           </div>
         </motion.div>
