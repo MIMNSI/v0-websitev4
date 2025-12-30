@@ -31,5 +31,5 @@ f:["$","li",null,{"className":"space-y-4","children":[["$","h2",null,{"className
 15:["$","li",null,{"className":"space-y-4","children":[["$","h2",null,{"className":"text-2xl font-semibold text-white","children":"GRIEVANCE OFFICER:"}],["$","p",null,{"className":"leading-relaxed","children":"If your complaint is not resolved even after complaining through Our complaint mechanism, then you can contact Our grievance officer at: info@metashopai.com"}]]}]
 16:["$","li",null,{"className":"space-y-4","children":[["$","h2",null,{"className":"text-2xl font-semibold text-white","children":"CONTACT US:"}],["$","p",null,{"className":"leading-relaxed","children":"For any queries or complaints related to the Service of the Website, you contact us by writing to us on: info@metashopai.com"}]]}]
 1b:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-1d:[["$","title","0",{"children":"Privacy Policy"}],["$","meta","1",{"name":"description","content":"Created with v0"}],["$","meta","2",{"name":"generator","content":"v0.app"}]]
+1d:[["$","title","0",{"children":"Privacy Policy"}],["$","meta","1",{"name":"description","content":"Everything to 3D with AI at scale"}],["$","meta","2",{"name":"generator","content":"v0.app"}]]
 19:null

@@ -3553,7 +3553,7 @@ void main() {
           industryId: "residential",
           logo: "/logos/lnt-logo-white.png",
           modelUrl:
-            "https://propertyscans.s3.ap-south-1.amazonaws.com/LnT/LnT_4bhk_sample_flat/LnT4bhk_EvaraHeights.html",
+            "https://metashopairealestate.s3.us-east-1.amazonaws.com/L%26T/LnT4bhk_EvaraHeights.html",
         },
         {
           id: "kesari",
@@ -4508,30 +4508,26 @@ void main() {
             (0, e.jsxs)("div", {
               className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6",
               children: [
-                n
-                  .slice(0, 3)
-                  .map((t) =>
-                    (0, e.jsx)(
-                      "div",
-                      {
-                        className: "lg:col-span-2",
-                        children: (0, e.jsx)(h, { feature: t }),
-                      },
-                      t.id
-                    )
-                  ),
-                n
-                  .slice(3, 5)
-                  .map((t) =>
-                    (0, e.jsx)(
-                      "div",
-                      {
-                        className: "lg:col-span-3",
-                        children: (0, e.jsx)(h, { feature: t }),
-                      },
-                      t.id
-                    )
-                  ),
+                n.slice(0, 3).map((t) =>
+                  (0, e.jsx)(
+                    "div",
+                    {
+                      className: "lg:col-span-2",
+                      children: (0, e.jsx)(h, { feature: t }),
+                    },
+                    t.id
+                  )
+                ),
+                n.slice(3, 5).map((t) =>
+                  (0, e.jsx)(
+                    "div",
+                    {
+                      className: "lg:col-span-3",
+                      children: (0, e.jsx)(h, { feature: t }),
+                    },
+                    t.id
+                  )
+                ),
                 (0, e.jsx)("div", {
                   className: "lg:col-span-6",
                   children: (0, e.jsxs)("div", {

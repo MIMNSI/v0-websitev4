@@ -22,9 +22,10 @@ const fontHandwritten = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "MetaShop AI",
+  description: "Everything to 3D with AI at scale",
+  // You can remove generator or change it to your brand
+  generator: "MetaShop AI",
 };
 
 export default function RootLayout({

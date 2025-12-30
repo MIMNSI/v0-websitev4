@@ -5,22 +5,16 @@ import { motion } from "framer-motion";
 import { PlayCircle, X, Loader2 } from "lucide-react";
 
 // -- Data --
+// UPDATED: Industry tab sequence: Travel -> Commercial -> Residential -> E-commerce
 const industries = [
-  { id: "residential", name: "Residential" },
   { id: "travel", name: "Travel & Hospitality" },
   { id: "commercial", name: "Commercial" },
+  { id: "residential", name: "Residential" },
   { id: "ecommerce", name: "E-commerce" },
 ];
 
+// UPDATED: Logo sequence: Kesari -> Ultraviolette -> L&T -> Itallica -> Material Depot
 const allClients = [
-  {
-    id: "lnt",
-    name: "L&T Realty",
-    industryId: "residential",
-    logo: "/logos/lnt-logo-white.png",
-    modelUrl:
-      "https://propertyscans.s3.ap-south-1.amazonaws.com/LnT/LnT_4bhk_sample_flat/LnT4bhk_EvaraHeights.html",
-  },
   {
     id: "kesari",
     name: "Kesari Awayddings",
@@ -36,6 +30,14 @@ const allClients = [
     logo: "/logos/ultraviolette.svg",
     modelUrl:
       "https://metashopairealestate.s3.us-east-1.amazonaws.com/UV_FST+2/UV_Manual_3Points.html",
+  },
+  {
+    id: "lnt",
+    name: "L&T Realty",
+    industryId: "residential",
+    logo: "/logos/lnt-logo-white.png",
+    modelUrl:
+      "https://metashopairealestate.s3.us-east-1.amazonaws.com/L%26T/LnT4bhk_EvaraHeights_.html",
   },
   {
     id: "itallica",
@@ -201,7 +203,6 @@ export default function ProductionSection() {
   );
 
   return (
-    // UPDATED: Added id="production" here so we can scroll to it from Hero
     <section
       id="production"
       className="relative w-full min-h-screen bg-background flex flex-col justify-center py-8 md:py-12 lg:py-16 overflow-hidden"
