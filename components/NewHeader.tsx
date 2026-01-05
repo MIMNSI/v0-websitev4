@@ -79,7 +79,7 @@ export default function NewHeader() {
           </Link>
           {/* Logic: Full number visible ONLY on Desktop (hidden lg:inline) */}
           <span className="hidden lg:inline text-sm text-white/70 whitespace-nowrap">
-            Call: +91 9130971867
+            Call: +91 8412921292
           </span>
 
           <Link
@@ -142,7 +142,7 @@ export default function NewHeader() {
                 href="/contact"
                 className="text-sm text-white/90 hover:text-white transition-colors"
               >
-                Call: +91 9130971867
+                Call: +91 8412921292
               </Link>
               {/*<Link
                 href="/contact"

@@ -209,7 +209,7 @@ export default function ContactPage() {
                               href="tel:+91xxxxxxxxxx"
                               className="text-white/60 hover:text-primary transition-colors"
                             >
-                              +91 9130971867
+                              +91 8412921292
                             </a>
                           </div>
                         </div>
