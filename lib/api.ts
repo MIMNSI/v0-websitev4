@@ -3,6 +3,8 @@
 // 🟢 YOUR PRIVATE ACCESS KEY
 const ACCESS_KEY = "8b30a147-c47e-4011-bee9-1295529000f1";
 
+// lib/api.ts
+
 export const submitContactForm = async (payload: any) => {
   try {
     const res = await fetch("https://api.web3forms.com/submit", {
@@ -13,11 +15,13 @@ export const submitContactForm = async (payload: any) => {
       },
       body: JSON.stringify({
         access_key: ACCESS_KEY,
-        subject: `New Contact: ${payload.name}`,
+        // Change payload.name to payload.Name
+        subject: `New Contact: ${payload.Name}`,
         from_name: "MetaShop Contact Us",
         ...payload,
       }),
     });
+    // ... rest of code
 
     const data = await res.json();
 
