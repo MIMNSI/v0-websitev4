@@ -1,7 +1,7 @@
 1:"$Sreact.fragment"
-2:I[72516,["/_next/static/chunks/f8c5f06d9d7e32d1.js","/_next/static/chunks/4562adacfc7bbcd3.js","/_next/static/chunks/c87f474c17f0615b.js","/_next/static/chunks/0ed2cfde6a357acc.js"],"ViewportBoundary"]
-4:I[72516,["/_next/static/chunks/f8c5f06d9d7e32d1.js","/_next/static/chunks/4562adacfc7bbcd3.js","/_next/static/chunks/c87f474c17f0615b.js","/_next/static/chunks/0ed2cfde6a357acc.js"],"MetadataBoundary"]
+2:I[72516,["/_next/static/chunks/f1b8ff613c2f0fc6.js","/_next/static/chunks/0a40fa184e06390f.js","/_next/static/chunks/c87f474c17f0615b.js","/_next/static/chunks/0ed2cfde6a357acc.js"],"ViewportBoundary"]
+4:I[72516,["/_next/static/chunks/f1b8ff613c2f0fc6.js","/_next/static/chunks/0a40fa184e06390f.js","/_next/static/chunks/c87f474c17f0615b.js","/_next/static/chunks/0ed2cfde6a357acc.js"],"MetadataBoundary"]
 5:"$Sreact.suspense"
-0:{"buildId":"_gxGWATG3O2omr6joe6fi","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"3f8cZHog_alVQZpSYmCAS","rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
 3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
-6:[["$","title","0",{"children":"v0 App"}],["$","meta","1",{"name":"description","content":"Everything to 3D with AI at scale"}],["$","meta","2",{"name":"generator","content":"v0.app"}]]
+6:[["$","title","0",{"children":"MetaShop AI"}],["$","meta","1",{"name":"description","content":"Everything to 3D with AI at scale"}],["$","meta","2",{"name":"generator","content":"MetaShop AI"}]]
