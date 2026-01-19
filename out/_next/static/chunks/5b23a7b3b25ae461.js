@@ -1323,7 +1323,7 @@
                                                   href: "tel:+91xxxxxxxxxx",
                                                   className:
                                                     "text-white/60 hover:text-primary transition-colors",
-                                                  children: "+91 8412921292",
+                                                  children: "+91 84 1292 1292",
                                                 }),
                                               ],
                                             }),

@@ -130,7 +130,7 @@
                   (0, t.jsx)("span", {
                     className:
                       "hidden lg:inline text-sm text-white/70 whitespace-nowrap",
-                    children: "Call: +91 8412921292",
+                    children: "Call: +91 84 1292 1292",
                   }),
                   (0, t.jsxs)(r.default, {
                     href: "/contact",
@@ -192,7 +192,7 @@
                       href: "/contact",
                       className:
                         "text-sm text-white/90 hover:text-white transition-colors",
-                      children: "Call: +91 8412921292",
+                      children: "Call: +91 84 1292 1292",
                     }),
                   }),
                 ],
@@ -1960,7 +1960,7 @@ Studies show 3D reduces returns by up to 40%.`,
                                           href: "tel:+91xxxxxxxxxx",
                                           className:
                                             "text-white/60 hover:text-primary transition-colors",
-                                          children: "+91 8412921292",
+                                          children: "+91 84 1292 1292",
                                         }),
                                       ],
                                     }),
