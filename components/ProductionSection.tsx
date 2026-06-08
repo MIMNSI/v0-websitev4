@@ -21,7 +21,7 @@ const allClients = [
     industryId: "travel",
     logo: "/logos/awayddings-logo.webp",
     modelUrl:
-      "https://metashopairealestate.s3.us-east-1.amazonaws.com/uiUpdater/Dallas/Exterior/Dallas_Exterior.html",
+      "https://storage.googleapis.com/metashoprealestate/uiUpdater/Dallas/Exterior/Dallas_Exterior.html",
   },
   {
     id: "ultraviolette",
@@ -29,7 +29,7 @@ const allClients = [
     industryId: "commercial",
     logo: "/logos/ultraviolette.svg",
     modelUrl:
-      "https://metashopairealestate.s3.us-east-1.amazonaws.com/UV_FST+2/UV_Manual_3Points.html",
+      "https://storage.googleapis.com/metashoprealestate/UV_FST%203/UV_Manual_3Points.html",
   },
   {
     id: "lnt",
@@ -37,7 +37,7 @@ const allClients = [
     industryId: "residential",
     logo: "/logos/lnt-logo-white.png",
     modelUrl:
-      "https://metashopairealestate.s3.us-east-1.amazonaws.com/L%26T/LnT4bhk_EvaraHeights_.html",
+      "https://storage.googleapis.com/metashoprealestate/L%26T/Evara/Evara_3BHK.html",
   },
   {
     id: "itallica",
@@ -126,7 +126,7 @@ export default function ProductionSection() {
 
   const activeClient = useMemo(
     () => allClients.find((client) => client.id === activeClientId),
-    [activeClientId]
+    [activeClientId],
   );
 
   const openModal = useCallback(() => {
@@ -142,7 +142,7 @@ export default function ProductionSection() {
   const handleIndustryChange = (industryId: string) => {
     setActiveIndustry(industryId);
     const firstClient = allClients.find(
-      (client) => client.industryId === industryId
+      (client) => client.industryId === industryId,
     );
     if (firstClient) {
       setActiveClientId(firstClient.id);
@@ -298,8 +298,8 @@ export default function ProductionSection() {
                         ? "brightness-0 invert " +
                           (isActive ? "opacity-100" : "opacity-60")
                         : isActive
-                        ? "brightness-100 contrast-125"
-                        : "brightness-0 invert opacity-60 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100"
+                          ? "brightness-100 contrast-125"
+                          : "brightness-0 invert opacity-60 group-hover:brightness-100 group-hover:invert-0 group-hover:opacity-100"
                     }
                   `}
                 />
