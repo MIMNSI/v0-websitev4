@@ -1,9 +1,13 @@
 1:"$Sreact.fragment"
-2:I[68795,["/_next/static/chunks/06b53d44b8332554.js","/_next/static/chunks/c87f474c17f0615b.js"],"ClientPageRoot"]
-3:I[64138,["/_next/static/chunks/f1b8ff613c2f0fc6.js","/_next/static/chunks/0ed2cfde6a357acc.js","/_next/static/chunks/0a40fa184e06390f.js","/_next/static/chunks/8f7660f061e2fc6b.js","/_next/static/chunks/87f67d2f84045621.js","/_next/static/chunks/6ce771a232aa4b42.js"],"default"]
-6:I[72516,["/_next/static/chunks/06b53d44b8332554.js","/_next/static/chunks/c87f474c17f0615b.js"],"OutletBoundary"]
+2:I[1304,[],"ClientPageRoot"]
+3:I[885,["831","static/chunks/bd904a5c-fc4e4d3e245ba0c9.js","367","static/chunks/b536a0f1-75490ef6b28606ce.js","413","static/chunks/1329d575-89a52fac2abd6795.js","718","static/chunks/718-49a0b91273172259.js","953","static/chunks/953-02f244cf45795f91.js","607","static/chunks/607-f5435f95b6d4954c.js","609","static/chunks/609-c269671c24637907.js","369","static/chunks/369-7e246dff95c1964b.js","971","static/chunks/971-93d4aaf43266876c.js","250","static/chunks/app/image-to-3d/page-de30ef404097f56d.js"],"default"]
+6:I[484,[],"OutletBoundary"]
 7:"$Sreact.suspense"
+<<<<<<< Updated upstream
 0:{"buildId":"hpX91DBMm3rXnQOTnGfiT","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],[["$","script","script-0",{"src":"/_next/static/chunks/8f7660f061e2fc6b.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/87f67d2f84045621.js","async":true}],["$","script","script-2",{"src":"/_next/static/chunks/6ce771a232aa4b42.js","async":true}]],["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+=======
+0:{"buildId":"jBQ46uQ1zLQbJnE-Z9lKo","rsc":["$","$1","c",{"children":[["$","$L2",null,{"Component":"$3","serverProvidedParams":{"searchParams":{},"params":{},"promises":["$@4","$@5"]}}],null,["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]]}],"loading":null,"isPartial":false}
+>>>>>>> Stashed changes
 4:{}
 5:"$0:rsc:props:children:0:props:serverProvidedParams:params"
 8:null

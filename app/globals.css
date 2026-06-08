@@ -85,14 +85,16 @@
 
 /* Added brand color utilities to Tailwind theme */
 @theme inline {
-  /* Updated font-display to use Sora instead of Funnel Display */
-  --font-display: "Sora", "Sora Fallback";
-  /* Changed from Albert Sans to Geist */
-  --font-body: "Geist", "Geist Fallback";
+  --font-display:
+    "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  --font-body:
+    Inter, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-sans: var(--font-body);
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  /* Added handwritten font variable */
-  --font-handwritten: "Caveat", cursive;
+  --font-mono:
+    "SFMono-Regular", "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --font-handwritten: "Bradley Hand", "Segoe Print", cursive;
 
   /* Brand Colors */
   --color-primary: #2dffa7;
